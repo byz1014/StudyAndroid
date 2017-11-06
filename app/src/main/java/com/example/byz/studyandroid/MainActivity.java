@@ -1,6 +1,7 @@
 package com.example.byz.studyandroid;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -31,7 +32,7 @@ import okhttp3.Response;
 public class MainActivity extends BaseActivity {
     String url = "http://api.jcd6.com/channeldata";
     RecyclerView rv_list;
-    String names[] = {"1111", "22222", "33333333", "44444444", "5555555", "66666666", "77777", "888888", "999999", "0000000"};
+    String names[] = {"Loading", "22222", "33333333", "44444444", "5555555", "66666666", "77777", "888888", "999999", "0000000"};
     MyAdapter myAdapter;
 //华为8  c2f07887d6159a02
 //红米   da577dd60c7a7682
@@ -56,7 +57,13 @@ public class MainActivity extends BaseActivity {
         myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
             @Override
             public void OnItemClick(View v, int position) {
-                onToast(list.get(position));
+
+                switch (position){
+                    case 0:
+                        goActivity(LoadingActivity.class);
+                        break;
+                }
+//                onToast(list.get(position));
             }
 
         });
@@ -158,6 +165,11 @@ public class MainActivity extends BaseActivity {
         }
     }
 
+    private void goActivity(Class<?> cls){
+        Intent intent = new Intent(getActivity(),cls);
+        startActivity(intent);
+    }
+
     private void onChannel() {
         Map<String, String> map = new HashMap<>();
         map.put("device_id", CommonUtil.getDevice_id(getApplicationContext()));
@@ -181,4 +193,6 @@ public class MainActivity extends BaseActivity {
             }
         });
     }
+
+
 }

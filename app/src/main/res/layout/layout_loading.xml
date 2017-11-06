@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        style="@style/dialog"
+        android:text="loading"
+        android:id="@+id/tv_loading"
+         />
+    <TextView
+        style="@style/dialog"
+        android:text="dialog_is_or_no"
+        android:id="@+id/tv_dialog_yes_or_no"
+        />
+
+
+
+</LinearLayout>

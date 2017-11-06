@@ -29,14 +29,18 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public abstract int onLayout();
+
     public abstract void init();
+
     public Activity getActivity() {
         return this;
     }
+
     public void onToast(String message) {
 
         Toast.makeText(this, "" + message, Toast.LENGTH_SHORT).show();
     }
+
     public void onToastText(String message, Context mContext) {
 
 
@@ -67,15 +71,20 @@ public abstract class BaseActivity extends AppCompatActivity {
 //        toast.setGravity(Gravity.CENTER,100,100);
 //        toast.show();
     }
+
     DialogLoading alertDialog;
+
     public void onLoddingShow(Context context){
         alertDialog = new DialogLoading(context);
         alertDialog.setCanceledOnTouchOutside(false);
         alertDialog.show();
     }
+
     public void onLoddingHint(){
         if(alertDialog!=null){
-            alertDialog.dismiss();
+            if(alertDialog.isShowing()){
+                alertDialog.dismiss();
+            }
         }
     }
 
