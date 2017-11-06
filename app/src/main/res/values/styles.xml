@@ -8,4 +8,35 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+
+    <style name="progress" >
+        <item name="android:indeterminateDrawable">@drawable/shape_list_progress</item>
+    </style>
+
+    <style name="dialog_me" parent="@android:style/Theme.DeviceDefault.Light.Dialog">
+
+        <!--自定义对话框-->
+            <!-- 这里设置背景为透明，为了隐藏边框 -->
+            <item name="android:windowBackground">@android:color/transparent</item>
+            <item name="android:windowNoTitle">true</item>
+            <!-- 这里是修改顶部标题背景颜色，具体颜色自己定，可以是图片 -->
+            <item name="android:topDark">#0000</item>
+            <!-- 这里是修改内容区域背景颜色 -->
+            <item name="android:centerDark">#0000</item>
+            <item name="android:windowIsTranslucent">true</item>
+
+    </style>
+
+    <style name="text">
+        <item name="android:textColor">#fff</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:background">@drawable/shape_text</item>
+        <item name="android:paddingRight">10dp</item>
+        <item name="android:paddingLeft">10dp</item>
+        <item name="android:layout_margin">15dp</item>
+    </style>
+
 </resources>
