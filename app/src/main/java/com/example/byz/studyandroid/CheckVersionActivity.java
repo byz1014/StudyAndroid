@@ -1,7 +1,6 @@
 package com.example.byz.studyandroid;
 
 import android.Manifest;
-import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -20,10 +19,14 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
+
+import static android.Manifest.permission.ACCESS_NETWORK_STATE;
 
 /**
  * Created by byz on 2017/11/6.
@@ -54,6 +57,12 @@ public class CheckVersionActivity extends BaseActivity {
     @Override
     @Subscribe
     public void onEventMainThread(String str) {
+        if(str.equals("is_force_2")){
+            Toast.makeText(getActivity(),"取消下载",Toast.LENGTH_LONG).show();
+        }
+        if(str.equals("is_force_1")){
+            finish();
+        }
 
     }
 
@@ -66,9 +75,10 @@ public class CheckVersionActivity extends BaseActivity {
         HttpRequestUtilTest.getHttpRequestUtilTest().doGet(getActivity(), "http://api.jcd6.com/version", map, new HttpRequestUtilTest.OkHttpListener() {
             @Override
             public void onResponse(Call call, String response) throws JSONException {
+                Log.e("byz",response);
                 try {
                     JSONObject obj = new JSONObject(response);
-                    Log.e("byz",response);
+
                     if (obj.optString("code").equals("1")) {
                         JSONObject obj_data = obj.optJSONObject("data");
                         if (obj_data.optString("has_new").equals("1")) {
@@ -76,17 +86,17 @@ public class CheckVersionActivity extends BaseActivity {
                             download_url = obj_data.optString("download_url");
                             description = obj_data.optString("description");
                             is_force = obj_data.optString("is_force");
-                            Log.e("byz",ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)+"\n"+
-                                    PackageManager.PERMISSION_GRANTED);
-                            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-                                //申请权限is_force
-                                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
-                            } else {
-                                UpdateManager manager = new UpdateManager(getActivity());
-                                // 检查软件更新
-                                manager.checkVersions(obj_data.optString("has_new"), obj_data.optString("download_url"),
-                                        obj_data.optString("description"), obj_data.optString("is_force"));
+
+                            if(!SelectPermission(Manifest.permission.ACCESS_NETWORK_STATE)||
+                                    !SelectPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE)){
+                                Toast.makeText(getActivity(),"没有权限",Toast.LENGTH_SHORT).show();
+                               return;
                             }
+
+                            UpdateManager manager = new UpdateManager(getActivity());
+//                                    // 检查软件更新
+                                    manager.checkVersions(obj_data.optString("has_new"), obj_data.optString("download_url"),
+                                            obj_data.optString("description"), obj_data.optString("is_force"));
                         } else {
                              Toast.makeText(getActivity(),"无版本更新", Toast.LENGTH_LONG).show();
                         }
@@ -101,7 +111,7 @@ public class CheckVersionActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call call, IOException e) {
-
+                Log.e("byz",e.getMessage().toString()+"------");
             }
         });
     }
@@ -111,16 +121,44 @@ public class CheckVersionActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        permissionsUtils = PermissionsUtils.getPermissionsUtils();
-        if (permissionsUtils.isNeedCheck) {
-            permissionsUtils.checkPermissions(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        }
-
+        onSelectPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, ACCESS_NETWORK_STATE);
+        onAskPermission();
     }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        permissionsUtils.onResult(requestCode, permissions, grantResults, getActivity());
+        if(requestCode == 0){
+            for(int i=0;i<grantResults.length;i++){
+                if(grantResults[i]!=0){
+                    Toast.makeText(getActivity(),"缺少权限："+permissions[i]+"",Toast.LENGTH_LONG).show();
+                }
+            }
+
+        }
     }
+
+    private boolean SelectPermission(String permission) {
+//        PackageManager.PERMISSION_GRANTED = 0
+        if (ContextCompat.checkSelfPermission(getActivity(), permission) != 0) {
+            return false;
+        }
+        return true;
+    }
+
+List<String> permissions;
+    private void onSelectPermissions(String ...permission){
+        permissions = new ArrayList<>();
+        for(int i=0;i<permission.length;i++){
+            if(!SelectPermission(permission[i])){
+                permissions.add(permission[i]);
+            }
+        }
+    }
+    private void onAskPermission(){
+        if(permissions!=null&&permissions.size()!=0){
+            ActivityCompat.requestPermissions(getActivity(),permissions.toArray(new String[permissions.size()]),0);
+        }
+    }
+
 }

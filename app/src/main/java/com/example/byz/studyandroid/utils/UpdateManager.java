@@ -150,10 +150,11 @@ public class UpdateManager {
             public void onClick(DialogInterface dialog, int which) {
 
                 if (state) {
-                    System.exit(0);
+                    dialog.dismiss();
+                    EventBus.getDefault().post("is_force_1");
                 } else {
                     dialog.dismiss();
-                    EventBus.getDefault().post("is_force");
+                    EventBus.getDefault().post("is_force_2");
                 }
             }
         });
@@ -311,21 +312,11 @@ public class UpdateManager {
             mContext.startActivity(intents);
         } else {
 
-//			File file = new File(Environment.getExternalStorageDirectory().getAbsolutePath() +"download"+ "jinchandai.apk");
                 if (apkfile.exists()) {
                     openFile(apkfile, mContext);
                 }
         }
-//		File apkfile = new File(mSavePath, "jinchandai");
-//		if (!apkfile.exists())
-//		{
-//			return;
-//		}
-//		// 通过Intent安装APK文件
-//		Intent i = new Intent(Intent.ACTION_VIEW);
-//		i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-//		i.setDataAndType(Uri.parse("file://" + apkfile.toString()), "application/vnd.android.package-archive");
-//		mContext.startActivity(i);
+
         System.exit(0);
     }
 
@@ -333,7 +324,7 @@ public class UpdateManager {
     public void openFile(File file, Context context) {
         Intent install = null;
         if(Build.VERSION.SDK_INT>=24) {//判读版本是否在7.0以上
-            Uri apkUri = FileProvider.getUriForFile(context, "com.cicada.loan.fileprovider", file);//在AndroidManifest中的android:authorities值
+            Uri apkUri = FileProvider.getUriForFile(context, "com.example.byz.studyandroid.fileprovider", file);//在AndroidManifest中的android:authorities值
              install = new Intent(Intent.ACTION_VIEW);
             install.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             install.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION);//添加这一句表示对目标应用临时授权该Uri所代表的文件

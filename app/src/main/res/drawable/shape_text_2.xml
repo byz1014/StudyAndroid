@@ -4,7 +4,7 @@
         android:startColor="#3400"
         android:centerColor="#6400"
         android:endColor="#9400"/>
-    <size android:height="20dp" android:width="60dp"/>
-    <corners android:radius="10dp"/>
+    <size android:height="40dp" android:width="80dp"/>
+    <corners android:radius="20dp"/>
 
 </shape>

@@ -47,6 +47,7 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:background">@drawable/shape_text_2</item>
         <item name="android:gravity">center</item>
+        <item name="android:padding">10dp</item>
         <item name="android:layout_margin">20dp</item>
     </style>
 
@@ -58,6 +59,16 @@
         <item name="android:windowBackground">@android:color/transparent</item>   <!-- 背景透明 -->
         <item name="android:backgroundDimEnabled">true</item>   <!-- 模糊 -->
 
+    </style>
+
+    <style name="pop_text">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/shape_pop</item>
+        <item name="android:textColor">#9000</item>
+        <item name="android:textSize">13dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:layout_margin">10dp</item>
     </style>
 
 </resources>

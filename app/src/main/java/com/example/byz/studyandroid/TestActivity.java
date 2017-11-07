@@ -12,6 +12,9 @@ import com.example.byz.studyandroid.base.BaseActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Created by byz on 2017/11/7.
  */
@@ -66,16 +69,44 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                 permission}, 0);
     }
 
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-                Log.e("byz",
-                requestCode + "\n" +
-                permissions.length + "\n" +
-                permissions[0] + "\n" +
-                grantResults.length + "\n" +
-                grantResults[0]);
+
+    List<String> permissions;
+    private void onSelectPermissions(String ...permission){
+        permissions = new ArrayList<>();
+        for(int i=0;i<permission.length;i++){
+            if(!SelectPermission(permission[i])){
+                permissions.add(permission[i]);
+            }
+        }
+    }
+    private void onAskPermission(){
+        ActivityCompat.requestPermissions(getActivity(),permissions.toArray(new String[permissions.size()]),0);
     }
 
 
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if(requestCode == 0){
+            for(int i=0;i<grantResults.length;i++){
+                if(grantResults[i] == 0){
+                    Log.e("byz",permissions[i]+"---权限获取成功");
+                }else{
+                    Log.e("byz",permissions[i]+"---权限获取失败");
+                }
+            }
+        }
+    }
+
+    /**
+     * 需要进行检测的权限数组
+     */
+    protected String[] needPermissions = {
+            Manifest.permission.ACCESS_COARSE_LOCATION,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE,
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.READ_PHONE_STATE
+    };
 }
