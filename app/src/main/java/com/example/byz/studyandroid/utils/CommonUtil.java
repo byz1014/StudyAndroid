@@ -1,6 +1,8 @@
 package com.example.byz.studyandroid.utils;
 
 import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
@@ -209,5 +211,28 @@ public class CommonUtil {
             e.printStackTrace();
         }
         return null;
+    }
+
+
+    /**
+     * @param context
+     * @return boolean true 网络可用  false 网络不可用
+     * @description 判断是否有网络连接
+     * <br>This method requires the call to hold the permission android.Manifest.permission.ACCESS_NETWORK_STATE.
+     * @author MDP
+     * create at 2015-4-7下午2:23:21
+     */
+    public static boolean isNetworkConnected(Context context) {
+        if (context != null) {
+            ConnectivityManager mConnectivityManager = (ConnectivityManager) context
+                    .getSystemService(Context.CONNECTIVITY_SERVICE);
+            NetworkInfo mNetworkInfo = mConnectivityManager
+                    .getActiveNetworkInfo();
+            if (mNetworkInfo != null && mNetworkInfo.isAvailable()
+                    && mNetworkInfo.isConnected()) {
+                return mNetworkInfo.isAvailable();
+            }
+        }
+        return false;
     }
 }

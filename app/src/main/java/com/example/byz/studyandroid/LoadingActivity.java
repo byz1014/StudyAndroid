@@ -30,7 +30,17 @@ public class LoadingActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_dialog_yes_or_no:
-                DialogUtils.getDialogUtils().AlerIntence(getActivity());
+                DialogUtils.getDialogUtils().AlerIntence(getActivity(), new DialogUtils.DialogListener() {
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onNext() {
+
+                    }
+                });
                 break;
             case R.id.tv_loading:
                 onLoddingShow(getActivity());

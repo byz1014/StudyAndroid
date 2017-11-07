@@ -32,7 +32,7 @@ import okhttp3.Response;
 public class MainActivity extends BaseActivity {
     String url = "http://api.jcd6.com/channeldata";
     RecyclerView rv_list;
-    String names[] = {"Loading", "22222", "33333333", "44444444", "5555555", "66666666", "77777", "888888", "999999", "0000000"};
+    String names[] = {"Loading", "版本检查", "33333333", "44444444", "5555555", "66666666", "77777", "888888", "999999", "0000000"};
     MyAdapter myAdapter;
 //华为8  c2f07887d6159a02
 //红米   da577dd60c7a7682
@@ -61,6 +61,9 @@ public class MainActivity extends BaseActivity {
                 switch (position){
                     case 0:
                         goActivity(LoadingActivity.class);
+                        break;
+                    case 1:
+                        goActivity(CheckVersionActivity.class);
                         break;
                 }
 //                onToast(list.get(position));
