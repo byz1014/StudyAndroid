@@ -13,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.byz.studyandroid.R;
+import com.example.byz.studyandroid.builder.DialogMessage;
 
 /**
  * Created by byz on 2017/11/6.
@@ -35,12 +36,12 @@ public class DialogUtils implements View.OnClickListener {
         return dialogUtils;
     }
 
-    TextView tv_yes, tv_no;
+    TextView tv_yes, tv_no,tv_message;
     LinearLayout ll_body;
     Dialog dialog;
     Context mContext;
 
-    public void AlerIntence(Context mContext,DialogListener dialogListener) {
+    public void AlerIntence(Context mContext, DialogMessage dialogMessage, DialogListener dialogListener) {
         this.dialogListener = dialogListener;
 
         this.mContext = mContext;
@@ -54,6 +55,28 @@ public class DialogUtils implements View.OnClickListener {
         ll_body = (LinearLayout)window.findViewById(R.id.ll_body);
         tv_no = (TextView) window.findViewById(R.id.tv_no);
         tv_yes = (TextView) window.findViewById(R.id.tv_yes);
+        tv_message = (TextView)window.findViewById(R.id.tv_message);
+        if(dialogMessage.getLeft()!=null&&!dialogMessage.getLeft().equals("")){
+            tv_yes.setText(dialogMessage.getLeft());
+            tv_yes.setVisibility(View.VISIBLE);
+        }else{
+            tv_yes.setVisibility(View.GONE);
+        }
+
+        if(dialogMessage.getRight()!=null&&!dialogMessage.getRight().equals("")){
+            tv_no.setText(dialogMessage.getRight());
+            tv_no.setVisibility(View.VISIBLE);
+        }else{
+            tv_no.setVisibility(View.GONE);
+        }
+        if(dialogMessage.getMessage()!=null&&!dialogMessage.getMessage().equals("")){
+            tv_message.setText(dialogMessage.getMessage());
+            tv_message.setVisibility(View.VISIBLE);
+        }else{
+            tv_message.setVisibility(View.GONE);
+        }
+
+
         ObjectAnimator.ofFloat(ll_body, "rotation", 0, 3,0,-3,0 ).setDuration(300).start();
         tv_yes.setOnClickListener(this);
         tv_no.setOnClickListener(this);

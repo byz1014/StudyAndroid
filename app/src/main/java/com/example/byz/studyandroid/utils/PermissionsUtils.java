@@ -52,6 +52,9 @@ public class PermissionsUtils {
                          String[] permissions, int[] paramArrayOfInt, final Activity activity){
         if (requestCode == PERMISSION_REQUEST_CODE) {
             if (!verifyPermissions(paramArrayOfInt)) {
+//                DialogUtils.getDialogUtils().o
+
+
                 DialogUtils.getDialogUtils().onSetting(activity, new DialogUtils.DialogListener() {
                     @Override
                     public void onCancel() {

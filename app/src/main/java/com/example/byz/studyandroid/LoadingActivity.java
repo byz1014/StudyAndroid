@@ -4,6 +4,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.byz.studyandroid.base.BaseActivity;
+import com.example.byz.studyandroid.builder.DialogMessage;
 import com.example.byz.studyandroid.utils.DialogUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -38,7 +39,12 @@ public class LoadingActivity extends BaseActivity implements View.OnClickListene
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.tv_dialog_yes_or_no:
-                DialogUtils.getDialogUtils().AlerIntence(getActivity(), new DialogUtils.DialogListener() {
+                DialogMessage dialogMessage =new  DialogMessage.Builder()
+                        .message("你给权限了吗？？？？")
+                        .left("取消")
+                        .right("去设置")
+                        .build();
+                DialogUtils.getDialogUtils().AlerIntence(getActivity(),dialogMessage, new DialogUtils.DialogListener() {
                     @Override
                     public void onCancel() {
 

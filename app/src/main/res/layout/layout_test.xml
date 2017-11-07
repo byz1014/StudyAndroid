@@ -3,4 +3,11 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        style="@style/text"
+        android:text="权限测试"
+        android:id="@+id/test"
+        />
+
+
 </LinearLayout>
