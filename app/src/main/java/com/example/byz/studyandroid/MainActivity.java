@@ -12,6 +12,7 @@ import com.example.byz.studyandroid.base.BaseActivity;
 import com.example.byz.studyandroid.utils.CommonUtil;
 import com.example.byz.studyandroid.utils.SignUtils;
 
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 
 import java.io.IOException;
@@ -70,6 +71,12 @@ public class MainActivity extends BaseActivity {
             }
 
         });
+
+    }
+
+    @Override
+    @Subscribe
+    public void onEventMainThread(String str) {
 
     }
 

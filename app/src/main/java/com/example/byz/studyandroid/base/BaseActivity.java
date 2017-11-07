@@ -15,6 +15,9 @@ import android.widget.Toast;
 import com.example.byz.studyandroid.R;
 import com.example.byz.studyandroid.view.DialogLoading;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
 /**
  * Created by byz on 2017/11/6.
  */
@@ -24,6 +27,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(onLayout());
+        EventBus.getDefault().register(this);
         init();
 
     }
@@ -88,4 +92,12 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
+    @Subscribe
+    public abstract void onEventMainThread(String str);
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        EventBus.getDefault().unregister(this);
+    }
 }

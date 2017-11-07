@@ -1,7 +1,11 @@
 package com.example.byz.studyandroid;
 
 import android.Manifest;
+import android.content.pm.PackageManager;
 import android.support.annotation.NonNull;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -9,7 +13,9 @@ import android.widget.Toast;
 import com.example.byz.studyandroid.base.BaseActivity;
 import com.example.byz.studyandroid.utils.HttpRequestUtilTest;
 import com.example.byz.studyandroid.utils.PermissionsUtils;
+import com.example.byz.studyandroid.utils.UpdateManager;
 
+import org.greenrobot.eventbus.Subscribe;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -43,84 +49,14 @@ public class CheckVersionActivity extends BaseActivity {
                 onCheck();
             }
         });
-//tv_version.setOnClickListener(new View.OnClickListener() {
-//    @Override
-//    public void onClick(View view) {
-//        Map<String,String> map = new HashMap<String, String>();
-//        HttpRequestUtilTest.getHttpRequestUtilTest().doGet(getActivity(), "http://api.jcd6.com/version", map, new HttpRequestUtilTest.OkHttpListener() {
-//            @Override
-//            public void onResponse(Call call, String response) throws JSONException {
-//                Log.e("byz",response);
-//            }
-//
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//        });
-//    }
-//});
-
-//
-//        HttpRequestUtilTest.getHttpRequestUtilTest().doGet(getActivity(), "/version", map, new HttpRequestUtilTest.OkHttpListener() {
-//            @Override
-//            public void onResponse(Call call, String response) throws JSONException {
-//                try {
-//                    JSONObject obj = new JSONObject(response);
-//                    if (obj.optString("code").equals("1")) {
-//                        JSONObject obj_data = obj.optJSONObject("data");
-//                        if (obj_data.optString("has_new").equals("1")) {
-//                            if (null != mTimer) {
-//                                mTimer.cancel();
-//                            }
-//                            has_new = obj_data.optString("has_new");
-//                            download_url = obj_data.optString("download_url");
-//                            description = obj_data.optString("description");
-//                            is_force = obj_data.optString("is_force");
-//                            if (ContextCompat.checkSelfPermission(WelcomeActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                                //申请权限is_force
-//                                ActivityCompat.requestPermissions(WelcomeActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUESTPERMISSION);
-//                                AlertToast("请允许权限进行下载安装");
-//                            } else {
-//                                UpdateManager manager = new UpdateManager(WelcomeActivity.this);
-//                                // 检查软件更新
-//                                manager.checkVersions(obj_data.optString("has_new"), obj_data.optString("download_url"),
-//                                        obj_data.optString("description"), obj_data.optString("is_force"));
-//                            }
-//                        } else {
-//                            onTimerStart();
-//                            // Toast.makeText(mContext,"无版本更新", Toast.LENGTH_LONG).show();
-//                        }
-//
-//                    }else{
-//                        onTimerStart();
-//                    }
-//
-//                } catch (Exception e) {
-//                    e.printStackTrace();
-//
-//                    onTimerStart();
-//                    CountDownTimer countDownTimer = new CountDownTimer(6000, 1000) {
-//                        @Override
-//                        public void onTick(long millisUntilFinished) {
-//                            LogUtils(millisUntilFinished / 1000 + "");
-//                        }
-//
-//                        @Override
-//                        public void onFinish() {
-//                            LogUtils("");
-//                        }
-//                    };
-//                    countDownTimer.start();
-//                }
-//            }
-//
-//            @Override
-//            public void onFailure(Call call, IOException e) {
-//
-//            }
-//        });
     }
+
+    @Override
+    @Subscribe
+    public void onEventMainThread(String str) {
+
+    }
+
     String has_new,download_url,description,is_force;
 
     private void onCheck(){
@@ -132,6 +68,7 @@ public class CheckVersionActivity extends BaseActivity {
             public void onResponse(Call call, String response) throws JSONException {
                 try {
                     JSONObject obj = new JSONObject(response);
+                    Log.e("byz",response);
                     if (obj.optString("code").equals("1")) {
                         JSONObject obj_data = obj.optJSONObject("data");
                         if (obj_data.optString("has_new").equals("1")) {
@@ -139,16 +76,17 @@ public class CheckVersionActivity extends BaseActivity {
                             download_url = obj_data.optString("download_url");
                             description = obj_data.optString("description");
                             is_force = obj_data.optString("is_force");
-//                            if (ContextCompat.checkSelfPermission(WelcomeActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
-//                                //申请权限is_force
-//                                ActivityCompat.requestPermissions(WelcomeActivity.this, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, REQUESTPERMISSION);
-//                                AlertToast("请允许权限进行下载安装");
-//                            } else {
-//                                UpdateManager manager = new UpdateManager(WelcomeActivity.this);
-//                                // 检查软件更新
-//                                manager.checkVersions(obj_data.optString("has_new"), obj_data.optString("download_url"),
-//                                        obj_data.optString("description"), obj_data.optString("is_force"));
-//                            }
+                            Log.e("byz",ContextCompat.checkSelfPermission(getActivity(),Manifest.permission.WRITE_EXTERNAL_STORAGE)+"\n"+
+                                    PackageManager.PERMISSION_GRANTED);
+                            if (ContextCompat.checkSelfPermission(getActivity(), Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
+                                //申请权限is_force
+                                ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, 0);
+                            } else {
+                                UpdateManager manager = new UpdateManager(getActivity());
+                                // 检查软件更新
+                                manager.checkVersions(obj_data.optString("has_new"), obj_data.optString("download_url"),
+                                        obj_data.optString("description"), obj_data.optString("is_force"));
+                            }
                         } else {
                              Toast.makeText(getActivity(),"无版本更新", Toast.LENGTH_LONG).show();
                         }

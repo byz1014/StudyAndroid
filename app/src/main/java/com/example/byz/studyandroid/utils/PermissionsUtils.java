@@ -43,6 +43,7 @@ public class PermissionsUtils {
         if (null != needRequestPermissionList && needRequestPermissionList.size() > 0) {
             ActivityCompat.requestPermissions(activity,
                     needRequestPermissionList.toArray(new String[needRequestPermissionList.size()]),PERMISSION_REQUEST_CODE);
+
         }
     }
 
