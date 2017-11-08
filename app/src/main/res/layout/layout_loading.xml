@@ -13,7 +13,20 @@
         android:text="dialog_is_or_no"
         android:id="@+id/tv_dialog_yes_or_no"
         />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                style="@style/pop_text"
+                android:id="@+id/time_start"
+                android:text="start"/>
 
+            <TextView
+                style="@style/pop_text"
+                android:id="@+id/tv_text"
+                />
+        </LinearLayout>
 
 
 </LinearLayout>

@@ -9,7 +9,9 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
+import okhttp3.CacheControl;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.FormBody;
@@ -110,6 +112,17 @@ private static String ATG = "byz";
     public void doGet(final Activity mActivity, final String url, Map<String, String> map, final OkHttpListener okHttpListener) {
 
         Log.e(ATG,"url:get--"+url);
+        final CacheControl.Builder builder1 = new CacheControl.Builder();
+        builder1.noCache();//不使用缓存，全部走网络
+        builder1.noStore();//不使用缓存，也不存储缓存
+        builder1.onlyIfCached();//只使用缓存
+        builder1.noTransform();//禁止转码
+        builder1.maxAge(10, TimeUnit.MILLISECONDS);//指示客户机可以接收生存期不大于指定时间的响应。
+        builder1.maxStale(10, TimeUnit.SECONDS);//指示客户机可以接收超出超时期间的响应消息
+        builder1.minFresh(10, TimeUnit.SECONDS);//指示客户机可以接收响应时间小于当前时间加上指定时间的响应。
+        CacheControl cache = builder1.build();//cacheControl
+//        CacheControl.FORCE_CACHE; //仅仅使用缓存
+//        CacheControl.FORCE_NETWORK;// 仅仅使用网络
         /**
          * 配置请求参数
          */
@@ -131,6 +144,7 @@ private static String ATG = "byz";
          * 配置请求头
          */
         Request.Builder builder = new Request.Builder();
+        builder.cacheControl(cache);
         Iterator<Map.Entry<String, String>> entryIterator1 = getHead().entrySet().iterator();
         while (entryIterator1.hasNext()) {
             Map.Entry<String, String> entry = entryIterator1.next();

@@ -15,26 +15,26 @@ import com.example.byz.studyandroid.utils.BitmapUtil;
 import org.greenrobot.eventbus.Subscribe;
 
 /**
- * Created by byz on 2017/11/7.
+ * Created by byz on 2017/11/8.
  */
 
-public class TestActivity extends BaseActivity implements View.OnClickListener {
+public class BackgroundActivity extends BaseActivity implements View.OnClickListener{
     TextView test;
     ImageView iv_back;
     SeekBar sb_bar;
 
     @Override
     public int onLayout() {
-        return R.layout.layout_test;
+        return R.layout.layout_back_round;
     }
-int progress;
+    int progress;
     @Override
     public void init() {
         test = (TextView) findViewById(R.id.test);
         iv_back = (ImageView)findViewById(R.id.iv_back) ;
         sb_bar = (SeekBar)findViewById(R.id.sb_bar);
         test.setOnClickListener(this);
-          image = BitmapFactory.decodeResource(getResources(),R.mipmap.back_test2);
+        image = BitmapFactory.decodeResource(getResources(),R.mipmap.back_test2);
 
         sb_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
@@ -46,12 +46,6 @@ int progress;
                 Message message = new Message();
                 message.arg1 = progress;
                 handler.sendMessage(message);
-//                new Thread(new Runnable() {
-//                    @Override
-//                    public void run() {
-//
-//                    }
-//                }).start();
             }
 
             @Override
@@ -91,3 +85,4 @@ int progress;
     };
 
 }
+

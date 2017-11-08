@@ -14,7 +14,7 @@ import org.greenrobot.eventbus.Subscribe;
  */
 
 public class LoadingActivity extends BaseActivity implements View.OnClickListener{
-    TextView tv_loading,tv_dialog_yes_or_no;
+    TextView tv_loading,tv_dialog_yes_or_no,time_start ,tv_text;
 
     @Override
     public int onLayout() {
@@ -25,7 +25,10 @@ public class LoadingActivity extends BaseActivity implements View.OnClickListene
     public void init() {
         tv_loading = (TextView)findViewById(R.id.tv_loading);
         tv_dialog_yes_or_no = (TextView)findViewById(R.id.tv_dialog_yes_or_no);
+        time_start =(TextView)findViewById(R.id.time_start);
+        tv_text = (TextView)findViewById(R.id.tv_text);
         tv_loading.setOnClickListener(this);
+        time_start.setOnClickListener(this);
         tv_dialog_yes_or_no.setOnClickListener(this);
     }
 
@@ -59,6 +62,10 @@ public class LoadingActivity extends BaseActivity implements View.OnClickListene
             case R.id.tv_loading:
                 onLoddingShow(getActivity());
                 break;
+            case R.id.time_start:
+
+                break;
         }
     }
+
 }

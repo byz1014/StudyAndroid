@@ -72,9 +72,11 @@ public class CheckVersionActivity extends BaseActivity {
         Map<String,String> map = new HashMap<String, String>();
         map.put("version_name","100");
 
+        onLoddingShow(getActivity());
         HttpRequestUtilTest.getHttpRequestUtilTest().doGet(getActivity(), "http://api.jcd6.com/version", map, new HttpRequestUtilTest.OkHttpListener() {
             @Override
             public void onResponse(Call call, String response) throws JSONException {
+                onLoddingHint();
                 Log.e("byz",response);
                 try {
                     JSONObject obj = new JSONObject(response);
@@ -111,6 +113,7 @@ public class CheckVersionActivity extends BaseActivity {
 
             @Override
             public void onFailure(Call call, IOException e) {
+                onLoddingHint();
                 Log.e("byz",e.getMessage().toString()+"------");
             }
         });
