@@ -30,4 +30,5 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:3.9.0'
     compile 'com.android.support:recyclerview-v7:26.0.0-alpha1'
     compile 'org.greenrobot:eventbus:3.1.1'
+    compile 'com.charonchui.vitamio:vitamio:4.2.2'
 }

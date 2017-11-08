@@ -3,33 +3,39 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <ImageView
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/back_test"
-        android:scaleType="centerCrop"
-        android:id="@+id/iv_back"
-        />
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary">
+        <!--添加Toolbar的子控件-->
+        <Button
+            android:id="@+id/btn_diy"
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="right"
+            android:background="#80ffffff"
+            android:text="自定义按钮"
+            android:textColor="#000000"
+            android:textSize="11sp" />
 
-    <SeekBar
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:max="100"
-        android:progress="0"
-        android:id="@+id/sb_bar"
-        />
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:text="首页"
+            android:textColor="@android:color/black"
+            android:textSize="20sp" />
+    </android.support.v7.widget.Toolbar>
 
     <TextView
-        style="@style/text"
-        android:text="权限测试"
-        android:id="@+id/test"
-        />
-</LinearLayout>
-
-
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:text="hello_world"
+        android:textColor="@android:color/black"
+        android:textSize="30sp" />
 
 </RelativeLayout>
