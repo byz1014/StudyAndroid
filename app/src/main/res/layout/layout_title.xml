@@ -6,13 +6,18 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:background="#f00"
-        android:orientation="vertical">
+        android:layout_height="match_parent"
+        android:background="@drawable/shape_title_back"
+        android:gravity="center_vertical"
+        android:id="@+id/ll_body_title"
+        android:orientation="horizontal">
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/iv_left"
+            android:src="@mipmap/back"/>
 
         <TextView
             android:layout_width="match_parent"
@@ -20,12 +25,16 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="133352"
-            android:textColor="#000"
+            android:textColor="#fff"
+            android:id="@+id/tv_title"
             android:textSize="13dp" />
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:id="@+id/iv_right"
+            android:src="@mipmap/category"/>
     </LinearLayout>
 
 

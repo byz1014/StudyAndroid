@@ -1,12 +1,10 @@
 package com.example.byz.studyandroid;
 
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.PopupWindow;
@@ -28,66 +26,66 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     }
     @Override
     public void init() {
-        mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
-        mToast.setGravity(Gravity.CENTER, 0, 0);
-
-        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-        // App Logo
-//        mToolbar.setLogo(R.drawable.app_icon);
-        // 主标题,默认为app_label的名字
-        mToolbar.setTitle("Title");
-        mToolbar.setTitleTextColor(Color.YELLOW);
-        // 副标题
-        mToolbar.setSubtitle("Sub title");
-        mToolbar.setSubtitleTextColor(Color.parseColor("#80ff0000"));
-        //侧边栏的按钮
-        mToolbar.setNavigationIcon(R.mipmap.ic_launcher_round);
-        //取代原本的actionbar
-        setSupportActionBar(mToolbar);
-        //设置NavigationIcon的点击事件,需要放在setSupportActionBar之后设置才会生效,
-        //因为setSupportActionBar里面也会setNavigationOnClickListener
-        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mToast.setText("click NavigationIcon");
-                mToast.show();
-            }
-        });
-        //设置toolBar上的MenuItem点击事件
-        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.action_edit:
-                        mToast.setText("click edit");
-                        break;
-                    case R.id.action_share:
-                        mToast.setText("click share");
-                        break;
-                    case R.id.action_overflow:
-                        //弹出自定义overflow
-                        popUpMyOverflow();
-                        return true;
-                }
-                mToast.show();
-                return true;
-            }
-        });
-        //ToolBar里面还可以包含子控件
-        mToolbar.findViewById(R.id.btn_diy).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mToast.setText("点击自定义按钮");
-                mToast.show();
-            }
-        });
-        mToolbar.findViewById(R.id.tv_title).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                mToast.setText("点击自定义标题");
-                mToast.show();
-            }
-        });
+//        mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
+//        mToast.setGravity(Gravity.CENTER, 0, 0);
+//
+//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
+//        // App Logo
+////        mToolbar.setLogo(R.drawable.app_icon);
+//        // 主标题,默认为app_label的名字
+//        mToolbar.setTitle("Title");
+//        mToolbar.setTitleTextColor(Color.YELLOW);
+//        // 副标题
+//        mToolbar.setSubtitle("Sub title");
+//        mToolbar.setSubtitleTextColor(Color.parseColor("#80ff0000"));
+//        //侧边栏的按钮
+//        mToolbar.setNavigationIcon(R.mipmap.ic_launcher_round);
+//        //取代原本的actionbar
+//        setSupportActionBar(mToolbar);
+//        //设置NavigationIcon的点击事件,需要放在setSupportActionBar之后设置才会生效,
+//        //因为setSupportActionBar里面也会setNavigationOnClickListener
+//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mToast.setText("click NavigationIcon");
+//                mToast.show();
+//            }
+//        });
+//        //设置toolBar上的MenuItem点击事件
+//        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+//            @Override
+//            public boolean onMenuItemClick(MenuItem item) {
+//                switch (item.getItemId()) {
+//                    case R.id.action_edit:
+//                        mToast.setText("click edit");
+//                        break;
+//                    case R.id.action_share:
+//                        mToast.setText("click share");
+//                        break;
+//                    case R.id.action_overflow:
+//                        //弹出自定义overflow
+//                        popUpMyOverflow();
+//                        return true;
+//                }
+//                mToast.show();
+//                return true;
+//            }
+//        });
+//        //ToolBar里面还可以包含子控件
+//        mToolbar.findViewById(R.id.btn_diy).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mToast.setText("点击自定义按钮");
+//                mToast.show();
+//            }
+//        });
+//        mToolbar.findViewById(R.id.tv_title).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                mToast.setText("点击自定义标题");
+//                mToast.show();
+//            }
+//        });
     }
 
     @Override

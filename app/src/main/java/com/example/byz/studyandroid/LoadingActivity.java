@@ -2,6 +2,7 @@ package com.example.byz.studyandroid;
 
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.byz.studyandroid.base.BaseActivity;
 import com.example.byz.studyandroid.builder.DialogMessage;
@@ -30,6 +31,18 @@ public class LoadingActivity extends BaseActivity implements View.OnClickListene
         tv_loading.setOnClickListener(this);
         time_start.setOnClickListener(this);
         tv_dialog_yes_or_no.setOnClickListener(this);
+        setLeftListener(new OnTitleLeftListener() {
+            @Override
+            public void onLeft() {
+                finish();
+            }
+        });
+        setRightListener(new OnTitleRightListener() {
+            @Override
+            public void onRight() {
+                Toast.makeText(getActivity(),"敬请期待",Toast.LENGTH_LONG).show();
+            }
+        });
     }
 
     @Override

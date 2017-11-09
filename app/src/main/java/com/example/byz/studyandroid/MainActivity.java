@@ -49,6 +49,7 @@ public class MainActivity extends BaseActivity {
     @Override
     public void init() {
         rv_list = (RecyclerView) findViewById(R.id.rv_list);
+        TitleHint();
         addView();
         myAdapter = new MyAdapter(getActivity(), list);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
