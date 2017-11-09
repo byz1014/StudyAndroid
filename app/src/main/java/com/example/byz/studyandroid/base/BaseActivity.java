@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -23,12 +24,23 @@ import org.greenrobot.eventbus.Subscribe;
  */
 
 public abstract class BaseActivity extends AppCompatActivity {
+    ActionBar actionBar;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(onLayout());
         EventBus.getDefault().register(this);
         init();
+            actionBar = getSupportActionBar();
+//        actionBar.setDisplayShowHomeEnabled(true);
+//        actionBar.setDisplayUseLogoEnabled(false);
+
+        actionBar.setCustomView(R.layout.layout_title);
+        actionBar.setDisplayShowTitleEnabled(false);
+        actionBar.setDisplayShowHomeEnabled(false);
+
+        actionBar.show();
 
     }
 

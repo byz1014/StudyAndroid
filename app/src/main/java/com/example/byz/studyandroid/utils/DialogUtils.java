@@ -49,7 +49,6 @@ public class DialogUtils implements View.OnClickListener {
         dialog.setCanceledOnTouchOutside(false);
         dialog.show();
 
-
         Window window = dialog.getWindow();
         window.setContentView(R.layout.layout_dialog);
         ll_body = (LinearLayout)window.findViewById(R.id.ll_body);
