@@ -156,6 +156,9 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     };
 
+    public void setTitleMessage(String message){
+        tv_title.setText(message);
+    }
 
     public void TitleHint(){
         mActionBar.hide();

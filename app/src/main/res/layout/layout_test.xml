@@ -3,39 +3,52 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <android.support.v7.widget.Toolbar
-        android:id="@+id/toolbar"
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <EditText
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
-        android:background="?attr/colorPrimary">
-        <!--添加Toolbar的子控件-->
-        <Button
-            android:id="@+id/btn_diy"
-            android:layout_width="60dp"
-            android:layout_height="wrap_content"
-            android:layout_gravity="right"
-            android:background="#80ffffff"
-            android:text="自定义按钮"
-            android:textColor="#000000"
-            android:textSize="11sp" />
+        android:layout_height="100dp"
+        android:background="@drawable/shape_lodding_back"
+        android:textColor="#00f"
+        android:gravity="top"
+        android:layout_margin="15dp"
+        android:padding="8dp"
+        android:id="@+id/et_info"
+        android:textSize="13dp"
+        />
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="首页"
-            android:textColor="@android:color/black"
-            android:textSize="20sp" />
-    </android.support.v7.widget.Toolbar>
+
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+    <TextView
+        style="@style/text"
+        android:text="生成二维码"
+        android:id="@+id/tv_ping"
+        />
 
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="hello_world"
-        android:textColor="@android:color/black"
-        android:textSize="30sp" />
+      style="@style/text"
+        android:text="扫一扫"
+        android:id="@+id/tv_sao_1_sao"
+        />
+
+</LinearLayout>
+
+
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/iv_xing"/>
+
+</LinearLayout>
+
+
 
 </RelativeLayout>

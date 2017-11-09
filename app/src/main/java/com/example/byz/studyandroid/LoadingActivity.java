@@ -43,6 +43,7 @@ public class LoadingActivity extends BaseActivity implements View.OnClickListene
                 Toast.makeText(getActivity(),"敬请期待",Toast.LENGTH_LONG).show();
             }
         });
+        setTitleMessage("Loading...");
     }
 
     @Override

@@ -16,6 +16,8 @@ import org.greenrobot.eventbus.Subscribe;
 
 /**
  * Created by byz on 2017/11/8.
+ * //模糊效果
+ *
  */
 
 public class BackgroundActivity extends BaseActivity implements View.OnClickListener{

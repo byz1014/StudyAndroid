@@ -1,6 +1,5 @@
 package com.example.byz.studyandroid;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -10,6 +9,7 @@ import android.view.View;
 import com.example.byz.studyandroid.adapter.MyAdapter;
 import com.example.byz.studyandroid.base.BaseActivity;
 import com.example.byz.studyandroid.utils.CommonUtil;
+import com.example.byz.studyandroid.utils.HttpRequestUtilTest;
 import com.example.byz.studyandroid.utils.SignUtils;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -18,28 +18,16 @@ import org.json.JSONException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.FormBody;
-import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.RequestBody;
-import okhttp3.Response;
 
 public class MainActivity extends BaseActivity {
     String url = "http://api.jcd6.com/channeldata";
     RecyclerView rv_list;
     String names[] = {"Loading", "版本检查", "背景模糊", "44444444", "5555555", "66666666", "77777", "888888", "999999", "test"};
     MyAdapter myAdapter;
-//华为8  c2f07887d6159a02
-//红米   da577dd60c7a7682
-//r9s    54060c337e4d9881
-//r11
-
 
     @Override
     public int onLayout() {
@@ -104,92 +92,6 @@ public class MainActivity extends BaseActivity {
 
     }
 
-
-    /**
-     * post请求方式
-     *
-     * @param url            请求地址
-     * @param map            post请求参数
-     * @param okHttpListener 回调接口
-     */
-    public void doPost(final Activity mActivity, final String url, Map<String, String> map, final OkHttpListener okHttpListener) {
-
-        /**
-         * 配置请求参数
-         */
-        FormBody.Builder formBody = new FormBody.Builder();
-        Iterator<Map.Entry<String, String>> entryIterator = map.entrySet().iterator();
-        while (entryIterator.hasNext()) {
-            Map.Entry<String, String> entry = entryIterator.next();
-            formBody.add(entry.getKey(), entry.getValue());
-        }
-        RequestBody requestBody = formBody.build();
-
-        /**
-         * 配置请求头
-         */
-        Request.Builder builder = new Request.Builder();
-        Iterator<Map.Entry<String, String>> entryIterator1 = getHead().entrySet().iterator();
-        while (entryIterator1.hasNext()) {
-            Map.Entry<String, String> entry = entryIterator1.next();
-            builder.addHeader(entry.getKey(), entry.getValue());
-        }
-        Request request = builder.url(url).post(requestBody).build();
-        OkHttpClient okHttpClient = new OkHttpClient();
-        Call call = okHttpClient.newCall(request);
-        call.enqueue(new Callback() {
-            @Override
-            public void onFailure(final Call call, final IOException e) {
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        okHttpListener.onFailure(call, e);
-                    }
-                });
-
-            }
-
-            @Override
-            public void onResponse(final Call call, final Response response) throws IOException {
-                final String body = response.body().string();
-                mActivity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            okHttpListener.onResponse(call, body);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                });
-
-            }
-        });
-    }
-
-    public interface OkHttpListener {
-        void onResponse(Call call, String response) throws JSONException;
-
-        void onFailure(Call call, IOException e);
-    }
-
-
-    /**
-     * 配置请求头信息
-     *
-     * @return
-     */
-    private Map<String, String> getHead() {
-        final Map<String, String> head_map = new HashMap<String, String>();
-        head_map.put("Accept", "application/json");
-        head_map.put("ntype", "Android");
-        head_map.put("fly", "jcd2089");
-        head_map.put("nversion", "11111111111");
-        head_map.put("imei", "2222222222222");
-        head_map.put("sys_version", "33333333333");
-        return head_map;
-    }
-
     List<String> list;
 
     private void addView() {
@@ -215,7 +117,7 @@ public class MainActivity extends BaseActivity {
         map.put("uuid", CommonUtil.getUuid(getApplicationContext()));
         map.put("ip", CommonUtil.getIP(getApplicationContext()));
         map.put("sign", SignUtils.getSignUtils().getSignChannel(CommonUtil.getUuid(getApplicationContext())));
-        doPost(getActivity(), url, map, new OkHttpListener() {
+        HttpRequestUtilTest.getHttpRequestUtilTest().doPost(getActivity(), url, map, new HttpRequestUtilTest.OkHttpListener() {
             @Override
             public void onResponse(Call call, String response) throws JSONException {
                 Log.e("byz", response);
@@ -226,6 +128,7 @@ public class MainActivity extends BaseActivity {
                 Log.e("byz", e.getMessage().toString() + "");
             }
         });
+
     }
 
 

@@ -1,24 +1,43 @@
 package com.example.byz.studyandroid;
 
-import android.graphics.Rect;
-import android.graphics.drawable.ColorDrawable;
-import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
-import android.view.Menu;
+import android.content.Context;
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.net.Uri;
+import android.os.Bundle;
+import android.os.Environment;
+import android.provider.MediaStore;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.PopupWindow;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.byz.studyandroid.base.BaseActivity;
+import com.example.byz.studyandroid.builder.DialogMessage;
+import com.example.byz.studyandroid.utils.DialogUtils;
+import com.example.byz.studyandroid.utils.QRCodeCreateUtil;
+import com.google.zxing.Result;
+import com.google.zxing.integration.android.IntentIntegrator;
+import com.google.zxing.integration.android.IntentResult;
 
 import org.greenrobot.eventbus.Subscribe;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 
 /**
  * Created by byz on 2017/11/7.
  */
 
 public class TestActivity extends BaseActivity implements View.OnClickListener {
+    TextView tv_ping,tv_sao_1_sao;
+    ImageView iv_xing;
+    EditText et_info;
 
     @Override
     public int onLayout() {
@@ -26,66 +45,38 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
     }
     @Override
     public void init() {
-//        mToast = Toast.makeText(this, "", Toast.LENGTH_SHORT);
-//        mToast.setGravity(Gravity.CENTER, 0, 0);
-//
-//        mToolbar = (Toolbar) findViewById(R.id.toolbar);
-//        // App Logo
-////        mToolbar.setLogo(R.drawable.app_icon);
-//        // 主标题,默认为app_label的名字
-//        mToolbar.setTitle("Title");
-//        mToolbar.setTitleTextColor(Color.YELLOW);
-//        // 副标题
-//        mToolbar.setSubtitle("Sub title");
-//        mToolbar.setSubtitleTextColor(Color.parseColor("#80ff0000"));
-//        //侧边栏的按钮
-//        mToolbar.setNavigationIcon(R.mipmap.ic_launcher_round);
-//        //取代原本的actionbar
-//        setSupportActionBar(mToolbar);
-//        //设置NavigationIcon的点击事件,需要放在setSupportActionBar之后设置才会生效,
-//        //因为setSupportActionBar里面也会setNavigationOnClickListener
-//        mToolbar.setNavigationOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mToast.setText("click NavigationIcon");
-//                mToast.show();
-//            }
-//        });
-//        //设置toolBar上的MenuItem点击事件
-//        mToolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
-//            @Override
-//            public boolean onMenuItemClick(MenuItem item) {
-//                switch (item.getItemId()) {
-//                    case R.id.action_edit:
-//                        mToast.setText("click edit");
-//                        break;
-//                    case R.id.action_share:
-//                        mToast.setText("click share");
-//                        break;
-//                    case R.id.action_overflow:
-//                        //弹出自定义overflow
-//                        popUpMyOverflow();
-//                        return true;
-//                }
-//                mToast.show();
-//                return true;
-//            }
-//        });
-//        //ToolBar里面还可以包含子控件
-//        mToolbar.findViewById(R.id.btn_diy).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mToast.setText("点击自定义按钮");
-//                mToast.show();
-//            }
-//        });
-//        mToolbar.findViewById(R.id.tv_title).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                mToast.setText("点击自定义标题");
-//                mToast.show();
-//            }
-//        });
+        tv_ping = (TextView)findViewById(R.id.tv_ping);
+        iv_xing = (ImageView)findViewById(R.id.iv_xing);
+        tv_sao_1_sao = (TextView)findViewById(R.id.tv_sao_1_sao) ;
+        et_info = (EditText)findViewById(R.id.et_info);
+        tv_ping.setOnClickListener(this);
+        tv_sao_1_sao.setOnClickListener(this);
+//        new IntentIntegrator(this).initiateScan();
+        iv_xing.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                DialogMessage dialogMessage =new DialogMessage.Builder()
+                        .left("copy")
+                        .right("cancel")
+                        .message("Are you sure ?  copy!!!")
+                        .build();
+                DialogUtils.getDialogUtils().AlerIntence(getActivity(), dialogMessage, new DialogUtils.DialogListener() {
+                    @Override
+                    public void onCancel() {
+
+                    }
+
+                    @Override
+                    public void onNext() {
+                        savePic2Phone(getActivity(),iv_xing.getDrawingCache());
+                        iv_xing.setDrawingCacheEnabled(false);
+                    }
+                });
+                return true;
+            }
+        });
+
+
     }
 
     @Override
@@ -94,68 +85,106 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
     }
 
-    Toolbar mToolbar;
-    Toast mToast;
-    PopupWindow mPopupWindow;
-    //如果有Menu,创建完后,系统会自动添加到ToolBar上
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        super.onCreateOptionsMenu(menu);
-        getMenuInflater().inflate(R.menu.menu_main, menu);
-        return true;
-    }
-
-    /**
-     * 弹出自定义的popWindow
-     */
-    public void popUpMyOverflow() {
-        //获取状态栏高度
-        Rect frame = new Rect();
-        getWindow().getDecorView().getWindowVisibleDisplayFrame(frame);
-        //状态栏高度+toolbar的高度
-        int yOffset = frame.top + mToolbar.getHeight();
-        if (null == mPopupWindow) {
-            //初始化PopupWindow的布局
-            View popView = getLayoutInflater().inflate(R.layout.action_overflow_popwindow, null);
-            //popView即popupWindow的布局，ture设置focusAble.
-            mPopupWindow = new PopupWindow(popView,
-                    ViewGroup.LayoutParams.WRAP_CONTENT,
-                    ViewGroup.LayoutParams.WRAP_CONTENT, true);
-            //必须设置BackgroundDrawable后setOutsideTouchable(true)才会有效
-            mPopupWindow.setBackgroundDrawable(new ColorDrawable());
-            //点击外部关闭。
-            mPopupWindow.setOutsideTouchable(true);
-            //设置一个动画。
-            mPopupWindow.setAnimationStyle(android.R.style.Animation_Dialog);
-            //设置Gravity，让它显示在右上角。
-            mPopupWindow.showAtLocation(mToolbar, Gravity.RIGHT | Gravity.TOP, 0, yOffset);
-            //设置item的点击监听
-            popView.findViewById(R.id.ll_item1).setOnClickListener(this);
-            popView.findViewById(R.id.ll_item2).setOnClickListener(this);
-            popView.findViewById(R.id.ll_item3).setOnClickListener(this);
-        } else {
-            mPopupWindow.showAtLocation(mToolbar, Gravity.RIGHT | Gravity.TOP, 0, yOffset);
-        }
-
-    }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.ll_item1:
-                mToast.setText("哈哈");
+        switch (v.getId()){
+            case R.id.tv_ping:
+                if(et_info.getText().toString().trim().equals("")){
+                    onToastText("Empty content ?",getActivity());
+                }
+                iv_xing.setDrawingCacheEnabled(true);
+                Bitmap bitmap = BitmapFactory.decodeResource(getResources(),R.mipmap.ic_launcher_round);
+                iv_xing.setImageBitmap(QRCodeCreateUtil.createHaveLogoQRCode(et_info.getText().toString(),600,600,bitmap));
                 break;
-            case R.id.ll_item2:
-                mToast.setText("呵呵");
-                break;
-            case R.id.ll_item3:
-                mToast.setText("嘻嘻");
+            case R.id.tv_sao_1_sao:
+//                IntentIntegrator integrator = new IntentIntegrator(this);
+//                integrator.setPrompt("请扫描"); //底部的提示文字，设为""可以置空
+//                integrator.setCameraId(0); //前置或者后置摄像头
+//                integrator.setBeepEnabled(false); //扫描成功的「哔哔」声，默认开启
+//                integrator.initiateScan();
+//                integrator.setCaptureActivity(ScanActivity.class);
+                new IntentIntegrator(this).initiateScan();
                 break;
         }
-        //点击PopWindow的item后,关闭此PopWindow
-        if (null != mPopupWindow && mPopupWindow.isShowing()) {
-            mPopupWindow.dismiss();
-        }
-        mToast.show();
+
+
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent intent) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
+
+//        result.
+
+        if(result != null) {
+            if(result.getContents() == null) {
+                Log.e("byz", "Cancelled");
+                Toast.makeText(this, "Cancelled", Toast.LENGTH_LONG).show();
+            } else {
+                Log.e("byz", "Scanned: " + result.getContents());
+                Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
+            }
+        }
+
+
+    }
+
+
+
+
+    /**
+     * 处理扫描结果
+     * @param result
+     * @param barcode
+     */
+    public void handleDecode(Result result, Bitmap barcode) {
+//        inactivityTimer.onActivity();
+//        playBeepSoundAndVibrate();
+        String resultString = result.getText();
+        if (resultString.equals("")) {
+            Toast.makeText(getActivity(), "Scan failed!", Toast.LENGTH_SHORT).show();
+        }else {
+            Intent resultIntent = new Intent();
+            Bundle bundle = new Bundle();
+            bundle.putString("result", resultString);
+            bundle.putParcelable("bitmap", barcode);
+            resultIntent.putExtras(bundle);
+            this.setResult(RESULT_OK, resultIntent);
+        }
+    }
+
+
+
+
+    private   void savePic2Phone(Context context, Bitmap bmp) {
+        // 首先保存图片
+        File appDir = new File(Environment.getExternalStorageDirectory(), "dsh");
+        if (!appDir.exists()) {
+            appDir.mkdir();
+        }
+        String fileName = System.currentTimeMillis() + ".jpg";
+        File file = new File(appDir, fileName);
+        try {
+            FileOutputStream fos = new FileOutputStream(file);
+            bmp.compress(Bitmap.CompressFormat.JPEG, 100, fos);
+            fos.flush();
+            fos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        // 其次把文件插入到系统图库
+        try {
+            MediaStore.Images.Media.insertImage(context.getContentResolver(), file.getAbsolutePath(), fileName, null);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        // 最后通知图库更新
+        context.sendBroadcast(new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE, Uri.parse("file://" + Environment.getExternalStorageDirectory())));
+        onToastText("保存成功",getActivity());
+    }
+
 }
