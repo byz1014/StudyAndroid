@@ -15,34 +15,22 @@ import java.util.List;
  * Created by byz on 2017/11/6.
  */
 
-public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
+public abstract class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     Context mContext;
     List list;
-
     public MyAdapter(Context mContext, List list) {
-        this.mContext = mContext;
-        this.list = list;
     }
 
     @Override
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_item, parent, false);
+        View view = LayoutInflater.from(mContext).inflate(onLayout(), parent, false);
         MyViewHolder myViewHolder = new MyViewHolder(view);
         return myViewHolder;
     }
 
     @Override
     public void onBindViewHolder(MyViewHolder holder, final int position) {
-        String item = (String) list.get(position);
-        holder.tv_item.setText(item);
-        holder.view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (onItemClickListener != null) {
-                    onItemClickListener.OnItemClick(view, position);
-                }
-            }
-        });
+        onVersonUtil(list.get(position));
     }
 
     @Override
@@ -51,7 +39,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     }
 
 
-    class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         View view;
         TextView tv_item;
 
@@ -63,14 +51,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         }
     }
 
-    OnItemClickListener onItemClickListener;
-
-    public void setOnItemClickListener(OnItemClickListener OnIte ) {
-        this.onItemClickListener = OnIte;
-    }
-
-    public interface OnItemClickListener {
-        void OnItemClick(View v, int position);
-    }
+    public abstract void onVersonUtil(Object o);
+    public abstract int onLayout();
 
 }

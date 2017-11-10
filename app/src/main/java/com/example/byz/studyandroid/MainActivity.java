@@ -1,11 +1,12 @@
 package com.example.byz.studyandroid;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Gravity;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -37,6 +38,11 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     View  headerLayout;
     @Override
     public void onClick(View view) {
+        switch (view.getId()){
+            case R.id.iv_show:
+                dl_body.openDrawer(Gravity.START);
+                break;
+        }
     }
 
     @Override
@@ -51,97 +57,13 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         iv_show = (ImageView)findViewById(R.id.iv_show) ;
         TitleHint();
         addView();
+        iv_show.setOnClickListener(this);
+        dl_body.addDrawerListener(drawerListener);
+        navigation_view.setNavigationItemSelectedListener(onNavigationItemSelectedListener);
         leftAdapter = new LeftAdapter(list,getActivity());
         headerLayout = navigation_view.getHeaderView(0);
         tv_name = (TextView)headerLayout.findViewById(R.id.tv_name);
         cv_header = (CircleImageView)headerLayout.findViewById(R.id.cv_header);
-        rv_left_list = (RecyclerView) headerLayout.findViewById(R.id.rv_left_list);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
-        rv_left_list.setLayoutManager(layoutManager);
-        rv_left_list.setAdapter(leftAdapter);
-        leftAdapter.setOnItemClickListener(new LeftAdapter.OnItemClickListener() {
-            @Override
-            public void OnClickListener(int index) {
-                switch (index){
-                    case 0:
-                        Bundle bundle = new Bundle();
-                        bundle.putString("title",messages[index]);
-                        goActivity(LoadingActivity.class,bundle);
-                        break;
-                    case 1:
-                        Bundle bundle1 = new Bundle();
-                        bundle1.putString("title",messages[index]);
-                        goActivity(CheckVersionActivity.class,bundle1);
-                        break;
-                    case 2:
-                        Bundle bundle2 = new Bundle();
-                        bundle2.putString("title",messages[index]);
-                        goActivity(PasswordIocnActivity.class,bundle2);
-                        break;
-                    case 3:
-                        Bundle bundle3 = new Bundle();
-                        bundle3.putString("title",messages[index]);
-                        goActivity(BackgroundActivity.class,bundle3);
-                        break;
-                    case 4:
-
-                        break;
-                    case 5:
-
-                        break;
-                    case 6:
-
-                        break;
-                    case 7:
-
-                        break;
-                    case 8:
-
-                        break;
-                    case 9:
-                        Bundle bundle10 = new Bundle();
-                        bundle10.putString("title",messages[index]);
-                        goActivity(TestActivity.class,bundle10);
-                        break;
-                    case 10:
-
-                        break;
-                    case 11:
-
-                        break;
-                }
-            }
-        });
-
-        iv_show.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dl_body.openDrawer(Gravity.START);
-            }
-        });
-
-        dl_body.addDrawerListener(new DrawerLayout.DrawerListener() {
-            @Override
-            public void onDrawerSlide(View drawerView, float slideOffset) {
-                iv_show.setAlpha(1-slideOffset);
-            }
-
-            @Override
-            public void onDrawerOpened(View drawerView) {
-// 姐 妹 变态 前者
-            }
-
-            @Override
-            public void onDrawerClosed(View drawerView) {
-
-            }
-
-            @Override
-            public void onDrawerStateChanged(int newState) {
-
-            }
-        });
 
     }
 
@@ -160,4 +82,59 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         }
     }
 
+    NavigationView.OnNavigationItemSelectedListener onNavigationItemSelectedListener = new NavigationView.OnNavigationItemSelectedListener() {
+        @Override
+        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+            switch (item.getItemId()){
+                case R.id.mu_loading:
+                    Bundle bundle = new Bundle();
+                    bundle.putString("title","loading");
+                    goActivity(LoadingActivity.class,bundle);
+                    break;
+                case R.id.check_version:
+                    Bundle bundle1 = new Bundle();
+                    bundle1.putString("title","版本检查");
+                    goActivity(CheckVersionActivity.class,bundle1);
+                    break;
+                case R.id.see_icon:
+                    Bundle bundle2 = new Bundle();
+                    bundle2.putString("title","二维码扫描");
+                    goActivity(PasswordIocnActivity.class,bundle2);
+                    break;
+                case R.id.background_alph:
+                    Bundle bundle3 = new Bundle();
+                    bundle3.putString("title","背景模糊");
+                    goActivity(BackgroundActivity.class,bundle3);
+                    break;
+                case R.id.mu_test:
+                    Bundle bundle4 = new Bundle();
+                    bundle4.putString("title","测试模块");
+                    goActivity(TestActivity.class,bundle4);
+                    break;
+            }
+            return false;
+        }
+    };
+
+    DrawerLayout.DrawerListener drawerListener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(View drawerView, float slideOffset) {
+            iv_show.setAlpha(1-slideOffset);
+        }
+
+        @Override
+        public void onDrawerOpened(View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerClosed(View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+
+        }
+    };
 }

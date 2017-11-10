@@ -81,4 +81,9 @@
         <attr name="border_color" format="color" />
     </declare-styleable>
 
+    <!-- 高版本 -->
+    <style name="ItemHeight">
+        <item name="android:listPreferredItemHeightSmall">25dp</item>
+    </style>
+
 </resources>

@@ -3,21 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
-    <group  android:checkableBehavior="single">
-        <item android:icon="@mipmap/comments"
-            android:title="comments"
-            android:id="@+id/comments"
-            />
-        <item android:icon="@mipmap/edit"
-            android:title="edit"
-            android:id="@+id/edit"
-            />
-        <item android:icon="@mipmap/remind"
-            android:id="@+id/remind"
-            android:title="remind"/>
-        <item android:icon="@mipmap/viewgallery"
-            android:id="@+id/viewgallery"
-            android:title="viewgallery"/>
-    </group>
+        <item android:title="界面相关">
+            <menu>
+                <group android:checkableBehavior="single">
+                    <item android:title="loading"
+                        android:icon="@mipmap/icon1"
+                        android:id="@+id/mu_loading"/>
+                    <item android:title="版本检测"
+                        android:icon="@mipmap/icon2"
+                        android:id="@+id/check_version"/>
+                    <item android:title="二维码扫描"
+                        android:icon="@mipmap/icon3"
+                        android:id="@+id/see_icon"/>
+                    <item android:title="背景模糊"
+                        android:icon="@mipmap/icon4"
+                        android:id="@+id/background_alph"/>
+                </group>
+
+            </menu>
+
+        </item>
+    <item android:title="功能相关">
+        <menu>
+            <group android:checkableBehavior="single">
+                <item android:title="test模块"
+                    android:icon="@mipmap/icon5"
+                    android:id="@+id/mu_test"/>
+
+            </group>
+
+        </menu>
+
+    </item>
+
 
 </menu>
