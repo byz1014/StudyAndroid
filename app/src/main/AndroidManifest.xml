@@ -23,7 +23,12 @@
         android:supportsRtl="true"
         android:name=".base.MyApplication"
         android:theme="@style/AppTheme">
-
+        <!--<supports-screens-->
+            <!--android:smallScreens="true"-->
+            <!--android:normalScreens="true"-->
+            <!--android:largeScreens="true"-->
+            <!--android:resizeable="true"-->
+            <!--android:anyDensity="true" />-->
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.byz.studyandroid.fileprovider"
@@ -45,6 +50,8 @@
         <activity android:name=".BackgroundActivity"/>
         <activity android:name=".LoadingActivity"/>
         <activity android:name=".CheckVersionActivity"/>
+        <activity android:name=".ScanActivity"/>
+        <activity android:name=".PasswordIocnActivity"/>
     </application>
 
 </manifest>

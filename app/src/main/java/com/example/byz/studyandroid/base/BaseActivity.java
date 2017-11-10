@@ -35,8 +35,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         EventBus.getDefault().register(this);
         initViewActionBar();
         init();
-
-
     }
 
     public abstract int onLayout();
@@ -75,12 +73,6 @@ public abstract class BaseActivity extends AppCompatActivity {
         result.setDuration(Toast.LENGTH_LONG);
         result.show();
 
-//        View view = LayoutInflater.from(mContext).inflate(R.layout.layout_toast,null);
-//        TextView textView = (TextView)view.findViewById(R.id.tv_toast);
-//        textView.setText(message);
-//        toast.setView(view);
-//        toast.setGravity(Gravity.CENTER,100,100);
-//        toast.show();
     }
 
     DialogLoading alertDialog;

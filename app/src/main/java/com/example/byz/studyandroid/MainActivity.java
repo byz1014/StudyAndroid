@@ -26,7 +26,7 @@ import okhttp3.Call;
 public class MainActivity extends BaseActivity {
     String url = "http://api.jcd6.com/channeldata";
     RecyclerView rv_list;
-    String names[] = {"Loading", "版本检查", "背景模糊", "44444444", "5555555", "66666666", "77777", "888888", "999999", "test"};
+    String names[] = {"Loading", "版本检查", "背景模糊", "二维码", "5555555", "66666666", "77777", "888888", "999999", "test"};
     MyAdapter myAdapter;
 
     @Override
@@ -59,7 +59,7 @@ public class MainActivity extends BaseActivity {
                         goActivity(BackgroundActivity.class);
                         break;
                     case 3:
-
+                        goActivity(PasswordIocnActivity.class);
                         break;
                     case 4:
 
