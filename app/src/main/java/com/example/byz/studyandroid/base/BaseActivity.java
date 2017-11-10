@@ -2,6 +2,7 @@ package com.example.byz.studyandroid.base;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.ActionBar;
@@ -189,5 +190,12 @@ public abstract class BaseActivity extends AppCompatActivity {
     public interface OnTitleRightListener {
         void onRight();
     }
+
+    public void goActivity(Class<?> cls,Bundle bundle){
+        Intent intent = new Intent(getActivity(),cls);
+        intent.putExtra("data",bundle);
+        startActivity(intent);
+    }
+
 
 }

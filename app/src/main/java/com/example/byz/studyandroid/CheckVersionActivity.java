@@ -1,6 +1,7 @@
 package com.example.byz.studyandroid;
 
 import android.Manifest;
+import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -50,6 +51,16 @@ public class CheckVersionActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 onCheck();
+            }
+        });
+        Bundle bundle = getIntent().getBundleExtra("data");
+        String title = bundle.getString("title");
+        setTitleMessage(title);
+
+        setLeftListener(new OnTitleLeftListener() {
+            @Override
+            public void onLeft() {
+                finish();
             }
         });
     }

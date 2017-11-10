@@ -54,6 +54,15 @@ public class PasswordIocnActivity extends BaseActivity implements View.OnClickLi
         et_info = (EditText) findViewById(R.id.et_info);
         tv_ping.setOnClickListener(this);
         tv_sao_1_sao.setOnClickListener(this);
+        Bundle bundle = getIntent().getBundleExtra("data");
+        String title = bundle.getString("title");
+        setTitleMessage(title);
+        setLeftListener(new OnTitleLeftListener() {
+            @Override
+            public void onLeft() {
+                finish();
+            }
+        });
 //        new IntentIntegrator(this).initiateScan();
         iv_xing.setOnLongClickListener(new View.OnLongClickListener() {
             @Override

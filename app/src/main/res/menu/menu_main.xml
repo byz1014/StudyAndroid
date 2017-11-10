@@ -3,27 +3,21 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".MainActivity">
-
-    <item
-        android:id="@+id/action_edit"
-        android:icon="@mipmap/ic_launcher_round"
-        android:orderInCategory="80"
-        android:title="@string/action_edit"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/action_share"
-        android:icon="@mipmap/ic_launcher_round"
-        android:orderInCategory="90"
-        android:title="@string/action_share"
-        app:showAsAction="ifRoom" />
-
-    <item
-        android:id="@+id/action_overflow"
-        android:orderInCategory="100"
-        android:title="@string/action_more"
-        android:icon="@mipmap/ic_launcher_round"
-        app:showAsAction="always" />
-
+    <group  android:checkableBehavior="single">
+        <item android:icon="@mipmap/comments"
+            android:title="comments"
+            android:id="@+id/comments"
+            />
+        <item android:icon="@mipmap/edit"
+            android:title="edit"
+            android:id="@+id/edit"
+            />
+        <item android:icon="@mipmap/remind"
+            android:id="@+id/remind"
+            android:title="remind"/>
+        <item android:icon="@mipmap/viewgallery"
+            android:id="@+id/viewgallery"
+            android:title="viewgallery"/>
+    </group>
 
 </menu>

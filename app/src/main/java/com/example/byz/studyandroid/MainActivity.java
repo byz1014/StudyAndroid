@@ -1,33 +1,43 @@
 package com.example.byz.studyandroid;
 
-import android.content.Intent;
+import android.os.Bundle;
+import android.support.design.widget.NavigationView;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
+import android.widget.ImageView;
+import android.widget.TextView;
 
-import com.example.byz.studyandroid.adapter.MyAdapter;
+import com.example.byz.studyandroid.adapter.LeftAdapter;
 import com.example.byz.studyandroid.base.BaseActivity;
-import com.example.byz.studyandroid.utils.CommonUtil;
-import com.example.byz.studyandroid.utils.HttpRequestUtilTest;
-import com.example.byz.studyandroid.utils.SignUtils;
+import com.example.byz.studyandroid.bean.LeftInfo;
+import com.example.byz.studyandroid.view.CircleImageView;
 
 import org.greenrobot.eventbus.Subscribe;
-import org.json.JSONException;
 
-import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
-import okhttp3.Call;
-
-public class MainActivity extends BaseActivity {
-    String url = "http://api.jcd6.com/channeldata";
-    RecyclerView rv_list;
-    String names[] = {"Loading", "版本检查", "背景模糊", "二维码", "5555555", "66666666", "77777", "888888", "999999", "test"};
-    MyAdapter myAdapter;
+public class MainActivity extends BaseActivity implements View.OnClickListener{
+    NavigationView navigation_view ;
+    DrawerLayout dl_body;
+    ImageView iv_show;
+    RecyclerView rv_left_list;
+    List<LeftInfo> list;
+    String messages[]={"loading","版本检查","二维码扫描","背景模糊","功能5","功能6","功能7","功能8","功能9","功能10","test模块"};
+    int resources[]={
+            R.mipmap.icon1,R.mipmap.icon2,R.mipmap.icon3,
+            R.mipmap.icon4,R.mipmap.icon5,R.mipmap.icon6,R.mipmap.icon7,
+            R.mipmap.icon8,R.mipmap.icon9,R.mipmap.icona,R.mipmap.iconb };
+    LeftAdapter leftAdapter;
+    TextView tv_name;
+    CircleImageView cv_header  ;
+    View  headerLayout;
+    @Override
+    public void onClick(View view) {
+    }
 
     @Override
     public int onLayout() {
@@ -36,30 +46,43 @@ public class MainActivity extends BaseActivity {
 
     @Override
     public void init() {
-        rv_list = (RecyclerView) findViewById(R.id.rv_list);
+        navigation_view = (NavigationView)findViewById(R.id.navigation_view);
+        dl_body = (DrawerLayout)findViewById(R.id.dl_body);
+        iv_show = (ImageView)findViewById(R.id.iv_show) ;
         TitleHint();
         addView();
-        myAdapter = new MyAdapter(getActivity(), list);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
-        linearLayoutManager.setOrientation(LinearLayoutManager.VERTICAL);
-        rv_list.setLayoutManager(linearLayoutManager);
-        rv_list.setAdapter(myAdapter);
-        myAdapter.setOnItemClickListener(new MyAdapter.OnItemClickListener() {
-            @Override
-            public void OnItemClick(View v, int position) {
+        leftAdapter = new LeftAdapter(list,getActivity());
+        headerLayout = navigation_view.getHeaderView(0);
+        tv_name = (TextView)headerLayout.findViewById(R.id.tv_name);
+        cv_header = (CircleImageView)headerLayout.findViewById(R.id.cv_header);
+        rv_left_list = (RecyclerView) headerLayout.findViewById(R.id.rv_left_list);
 
-                switch (position){
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        rv_left_list.setLayoutManager(layoutManager);
+        rv_left_list.setAdapter(leftAdapter);
+        leftAdapter.setOnItemClickListener(new LeftAdapter.OnItemClickListener() {
+            @Override
+            public void OnClickListener(int index) {
+                switch (index){
                     case 0:
-                        goActivity(LoadingActivity.class);
+                        Bundle bundle = new Bundle();
+                        bundle.putString("title",messages[index]);
+                        goActivity(LoadingActivity.class,bundle);
                         break;
                     case 1:
-                        goActivity(CheckVersionActivity.class);
+                        Bundle bundle1 = new Bundle();
+                        bundle1.putString("title",messages[index]);
+                        goActivity(CheckVersionActivity.class,bundle1);
                         break;
                     case 2:
-                        goActivity(BackgroundActivity.class);
+                        Bundle bundle2 = new Bundle();
+                        bundle2.putString("title",messages[index]);
+                        goActivity(PasswordIocnActivity.class,bundle2);
                         break;
                     case 3:
-                        goActivity(PasswordIocnActivity.class);
+                        Bundle bundle3 = new Bundle();
+                        bundle3.putString("title",messages[index]);
+                        goActivity(BackgroundActivity.class,bundle3);
                         break;
                     case 4:
 
@@ -77,59 +100,64 @@ public class MainActivity extends BaseActivity {
 
                         break;
                     case 9:
-                        goActivity(TestActivity.class);
+                        Bundle bundle10 = new Bundle();
+                        bundle10.putString("title",messages[index]);
+                        goActivity(TestActivity.class,bundle10);
+                        break;
+                    case 10:
+
+                        break;
+                    case 11:
+
                         break;
                 }
             }
+        });
 
+        iv_show.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dl_body.openDrawer(Gravity.START);
+            }
+        });
+
+        dl_body.addDrawerListener(new DrawerLayout.DrawerListener() {
+            @Override
+            public void onDrawerSlide(View drawerView, float slideOffset) {
+                iv_show.setAlpha(1-slideOffset);
+            }
+
+            @Override
+            public void onDrawerOpened(View drawerView) {
+// 姐 妹 变态 前者
+            }
+
+            @Override
+            public void onDrawerClosed(View drawerView) {
+
+            }
+
+            @Override
+            public void onDrawerStateChanged(int newState) {
+
+            }
         });
 
     }
 
-    @Override
-    @Subscribe
+    @Override @Subscribe
     public void onEventMainThread(String str) {
 
     }
 
-    List<String> list;
-
-    private void addView() {
+    private void addView(){
         list = new ArrayList<>();
-        for (int i = 0; i < names.length; i++) {
-            list.add(names[i]);
+        for(int i=0;i<messages.length;i++){
+            if(i == 5){
+                continue;
+            }
+            list.add(new LeftInfo(messages[i],resources[i]));
         }
     }
-
-    private void goActivity(Class<?> cls){
-        Intent intent = new Intent(getActivity(),cls);
-        startActivity(intent);
-    }
-
-    private void onChannel() {
-        Map<String, String> map = new HashMap<>();
-        map.put("device_id", CommonUtil.getDevice_id(getApplicationContext()));
-        map.put("mac", CommonUtil.getMacAddress());
-        map.put("channel", "huawei");
-        map.put("channel_id", "11");
-        map.put("device_name", CommonUtil.getDeviceName());
-        map.put("os_version", CommonUtil.getOSVersion());
-        map.put("uuid", CommonUtil.getUuid(getApplicationContext()));
-        map.put("ip", CommonUtil.getIP(getApplicationContext()));
-        map.put("sign", SignUtils.getSignUtils().getSignChannel(CommonUtil.getUuid(getApplicationContext())));
-        HttpRequestUtilTest.getHttpRequestUtilTest().doPost(getActivity(), url, map, new HttpRequestUtilTest.OkHttpListener() {
-            @Override
-            public void onResponse(Call call, String response) throws JSONException {
-                Log.e("byz", response);
-            }
-
-            @Override
-            public void onFailure(Call call, IOException e) {
-                Log.e("byz", e.getMessage().toString() + "");
-            }
-        });
-
-    }
-
 
 }

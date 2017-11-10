@@ -2,6 +2,7 @@ package com.example.byz.studyandroid;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.view.View;
@@ -37,7 +38,15 @@ public class BackgroundActivity extends BaseActivity implements View.OnClickList
         sb_bar = (SeekBar)findViewById(R.id.sb_bar);
         test.setOnClickListener(this);
         image = BitmapFactory.decodeResource(getResources(),R.mipmap.back_test2);
-
+        Bundle bundle = getIntent().getBundleExtra("data");
+        String title = bundle.getString("title");
+        setLeftListener(new OnTitleLeftListener() {
+            @Override
+            public void onLeft() {
+                finish();
+            }
+        });
+        setTitleMessage(title);
         sb_bar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean b) {

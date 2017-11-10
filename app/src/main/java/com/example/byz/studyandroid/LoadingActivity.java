@@ -1,5 +1,6 @@
 package com.example.byz.studyandroid;
 
+import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +32,9 @@ public class LoadingActivity extends BaseActivity implements View.OnClickListene
         tv_loading.setOnClickListener(this);
         time_start.setOnClickListener(this);
         tv_dialog_yes_or_no.setOnClickListener(this);
+        Bundle bundle = getIntent().getBundleExtra("data");
+        String title = bundle.getString("title");
+        setTitleMessage(title);
         setLeftListener(new OnTitleLeftListener() {
             @Override
             public void onLeft() {
@@ -43,7 +47,7 @@ public class LoadingActivity extends BaseActivity implements View.OnClickListene
                 Toast.makeText(getActivity(),"敬请期待",Toast.LENGTH_LONG).show();
             }
         });
-        setTitleMessage("Loading...");
+
     }
 
     @Override

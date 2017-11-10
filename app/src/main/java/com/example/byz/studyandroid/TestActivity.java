@@ -1,5 +1,6 @@
 package com.example.byz.studyandroid;
 
+import android.os.Bundle;
 import android.view.View;
 
 import com.example.byz.studyandroid.base.BaseActivity;
@@ -24,14 +25,20 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
 
     @Override
     public void init() {
-
+        Bundle bundle = getIntent().getBundleExtra("data");
+        String title = bundle.getString("title");
+        setTitleMessage(title);
+        setLeftListener(new OnTitleLeftListener() {
+            @Override
+            public void onLeft() {
+                finish();
+            }
+        });
     }
 
-    @Override @Subscribe
+    @Override
+    @Subscribe
     public void onEventMainThread(String str) {
 
     }
-
-
-
 }
