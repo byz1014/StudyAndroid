@@ -30,6 +30,9 @@
     <item android:title="功能相关">
         <menu>
             <group android:checkableBehavior="single">
+                <item android:title="百度地图"
+                    android:icon="@mipmap/icon7"
+                    android:id="@+id/mu_baidu_map"/>
                 <item android:title="test模块"
                     android:icon="@mipmap/icon5"
                     android:id="@+id/mu_test"/>

@@ -5,9 +5,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.baselib.DialogUtils;
+import com.example.baselib.builder.DialogMessage;
 import com.example.byz.studyandroid.base.BaseActivity;
-import com.example.byz.studyandroid.builder.DialogMessage;
-import com.example.byz.studyandroid.utils.DialogUtils;
 
 import org.greenrobot.eventbus.Subscribe;
 

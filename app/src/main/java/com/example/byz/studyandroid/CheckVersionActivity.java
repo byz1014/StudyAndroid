@@ -10,9 +10,9 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.baselib.PermissionsUtils;
 import com.example.byz.studyandroid.base.BaseActivity;
 import com.example.byz.studyandroid.utils.HttpRequestUtilTest;
-import com.example.byz.studyandroid.utils.PermissionsUtils;
 import com.example.byz.studyandroid.utils.UpdateManager;
 
 import org.greenrobot.eventbus.Subscribe;
@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Map;
 
 import okhttp3.Call;
-
-import static android.Manifest.permission.ACCESS_NETWORK_STATE;
 
 /**
  * Created by byz on 2017/11/6.

@@ -13,7 +13,12 @@
     <uses-feature android:name="android.hardware.camera" /> <!-- 使用照相机权限 -->
     <uses-feature android:name="android.hardware.camera.autofocus" />
 
-
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="com.android.launcher.permission.READ_SETTINGS" />
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <uses-permission android:name="android.permission.GET_TASKS" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
 
     <application
         android:allowBackup="true"
@@ -23,12 +28,9 @@
         android:supportsRtl="true"
         android:name=".base.MyApplication"
         android:theme="@style/AppTheme">
-        <!--<supports-screens-->
-            <!--android:smallScreens="true"-->
-            <!--android:normalScreens="true"-->
-            <!--android:largeScreens="true"-->
-            <!--android:resizeable="true"-->
-            <!--android:anyDensity="true" />-->
+        <meta-data
+            android:name="com.baidu.lbsapi.API_KEY"
+            android:value="aTw7ZfgiSLLVHtmybIIOEW7E13NEq4um" />
         <provider
             android:name="android.support.v4.content.FileProvider"
             android:authorities="com.example.byz.studyandroid.fileprovider"
@@ -53,6 +55,7 @@
         <activity android:name=".ScanActivity"/>
         <activity android:name=".PasswordIocnActivity"/>
         <activity android:name=".RecycleViewActivity"/>
+        <activity android:name="com.example.baidumap.BaiduMapActivity"/>
     </application>
 
 </manifest>

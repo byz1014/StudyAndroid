@@ -1,12 +1,15 @@
-package com.example.byz.studyandroid.utils;
+package com.example.baselib;
 
+import android.Manifest;
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,38 +26,63 @@ public class PermissionsUtils {
     public boolean isNeedCheck = true;
     private static final int PERMISSION_REQUEST_CODE = 0;
     private static PermissionsUtils permissionsUtils;
-    private PermissionsUtils(){}
-    public static PermissionsUtils getPermissionsUtils(){
-        synchronized (PermissionsUtils.class){
-            if(permissionsUtils == null){
+
+    private PermissionsUtils() {
+    }
+
+    public static PermissionsUtils getPermissionsUtils() {
+        synchronized (PermissionsUtils.class) {
+            if (permissionsUtils == null) {
                 permissionsUtils = new PermissionsUtils();
             }
         }
         return permissionsUtils;
     }
 
+    /**
+     * 检查权限是否获取完成
+     */
+    private boolean state = false;
+    public boolean isPermissionAll(Context mContext, String... permissions) {
+        for (int i = 0; i < permissions.length; i++) {
+            if (ContextCompat.checkSelfPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION) != 0) {
+                state = false;
+                break;
+            } else {
+                state = true;
+            }
+        }
+        return state;
 
+    }
 
     /**
      * 检测权限
      */
     public void checkPermissions(Activity activity, String... permissions) {
-        List<String> needRequestPermissionList = findDeniedPermissions(permissions,activity);
+        List<String> needRequestPermissionList = findDeniedPermissions(permissions, activity);
         if (null != needRequestPermissionList && needRequestPermissionList.size() > 0) {
             ActivityCompat.requestPermissions(activity,
-                    needRequestPermissionList.toArray(new String[needRequestPermissionList.size()]),PERMISSION_REQUEST_CODE);
+                    needRequestPermissionList.toArray(new String[needRequestPermissionList.size()]), PERMISSION_REQUEST_CODE);
 
         }
     }
 
 
     public void onResult(int requestCode,
-                         String[] permissions, int[] paramArrayOfInt, final Activity activity){
+                         String[] permissions, int[] paramArrayOfInt, final Activity activity) {
         if (requestCode == PERMISSION_REQUEST_CODE) {
-            if (!verifyPermissions(paramArrayOfInt)) {
-//                DialogUtils.getDialogUtils().o
+            for(int i=0;i<paramArrayOfInt.length;i++){
+                if(paramArrayOfInt[i]!= PackageManager.PERMISSION_GRANTED){
+                    Log.e("byz",permissions[i]+"-------");
+                }
+
+            }
 
 
+
+
+            if (!verifyPermissions(permissions,paramArrayOfInt)) {
                 DialogUtils.getDialogUtils().onSetting(activity, new DialogUtils.DialogListener() {
                     @Override
                     public void onCancel() {
@@ -73,13 +101,8 @@ public class PermissionsUtils {
     }
 
 
-
-
-
-
-
     /**
-     *  启动应用的设置
+     * 启动应用的设置
      */
     private void startAppSettings(Activity activity) {
         Intent intent = new Intent(
@@ -90,7 +113,6 @@ public class PermissionsUtils {
 
     /**
      * 获取权限集中需要申请权限的列表
-     *
      */
     private List<String> findDeniedPermissions(String[] permissions, Activity activity) {
         List<String> needRequestPermissionList = new ArrayList<String>();
@@ -107,11 +129,11 @@ public class PermissionsUtils {
 
     /**
      * 检测是否所有的权限都已经授权
-     *
      */
-    private boolean verifyPermissions(int[] grantResults) {
-        for (int result : grantResults) {
-            if (result != PackageManager.PERMISSION_GRANTED) {
+    private boolean verifyPermissions(String[] permissions,int[] grantResults) {
+        for(int i=0;i<grantResults.length;i++){
+            if(grantResults[i]!=PackageManager.PERMISSION_GRANTED){
+                Log.e("byz","缺少权限："+permissions[i]);
                 return false;
             }
         }

@@ -1,6 +1,7 @@
 package com.example.byz.studyandroid.adapter;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
@@ -64,6 +65,12 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     public MyViewHolder setImageHeadUrl(int viewId,String url){
         ImageView mImageView = getView(viewId);
         ImageLoader.getInstance().displayImage(url, mImageView);
+        return this;
+    }
+
+    public MyViewHolder setImageBitmap(int viewId,Bitmap bitmap){
+        ImageView mImageView = getView(viewId);
+        mImageView.setImageBitmap(bitmap);
         return this;
     }
 

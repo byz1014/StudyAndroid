@@ -11,6 +11,7 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.baidumap.BaiduMapActivity;
 import com.example.byz.studyandroid.base.BaseActivity;
 import com.example.byz.studyandroid.bean.LeftInfo;
 import com.example.byz.studyandroid.view.CircleImageView;
@@ -108,6 +109,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     bundle4.putString("title","Recycle自定义适配器");
                     goActivity(RecycleViewActivity.class,bundle4);
                     break;
+                case R.id.mu_baidu_map:
+                    goActivity(BaiduMapActivity.class,null);
+                    break;
                 case R.id.mu_test:
                     Bundle bundles = new Bundle();
                     bundles.putString("title","测试模块");
@@ -118,6 +122,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             return false;
         }
     };
+//    C:\Users\byz\.android
 
     DrawerLayout.DrawerListener drawerListener = new DrawerLayout.DrawerListener() {
         @Override

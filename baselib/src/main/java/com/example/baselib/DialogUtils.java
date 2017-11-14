@@ -1,4 +1,4 @@
-package com.example.byz.studyandroid.utils;
+package com.example.baselib;
 
 import android.animation.ObjectAnimator;
 import android.app.Activity;
@@ -12,8 +12,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.byz.studyandroid.R;
-import com.example.byz.studyandroid.builder.DialogMessage;
+import com.example.baselib.builder.DialogMessage;
+
 
 /**
  * Created by byz on 2017/11/6.
@@ -85,17 +85,15 @@ public class DialogUtils implements View.OnClickListener {
 
     @Override
     public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.tv_no:
-                dialogListener.onCancel();
-                dialog.dismiss();
-                break;
-            case R.id.tv_yes:
-                dialogListener.onNext();
-                Toast.makeText(mContext, "yes", Toast.LENGTH_SHORT).show();
-                dialog.dismiss();
-                break;
+        if(view.getId() == R.id.tv_no){
+            dialogListener.onCancel();
+            dialog.dismiss();
+        }else if(view.getId() == R.id.tv_yes){
+            dialogListener.onNext();
+            Toast.makeText(mContext, "yes", Toast.LENGTH_SHORT).show();
+            dialog.dismiss();
         }
+
     }
 private DialogListener dialogListener;
 

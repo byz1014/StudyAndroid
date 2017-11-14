@@ -193,7 +193,9 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void goActivity(Class<?> cls,Bundle bundle){
         Intent intent = new Intent(getActivity(),cls);
-        intent.putExtra("data",bundle);
+        if(bundle!=null){
+            intent.putExtra("data",bundle);
+        }
         startActivity(intent);
     }
 

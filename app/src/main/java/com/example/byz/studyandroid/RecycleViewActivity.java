@@ -7,6 +7,7 @@ import android.support.v7.widget.RecyclerView;
 import com.example.byz.studyandroid.adapter.MyViewHolder;
 import com.example.byz.studyandroid.adapter.TotalRecycleAdapter;
 import com.example.byz.studyandroid.base.BaseActivity;
+import com.example.byz.studyandroid.utils.BitmapUtil;
 
 import org.greenrobot.eventbus.Subscribe;
 
@@ -52,7 +53,8 @@ public class RecycleViewActivity extends BaseActivity {
 
             @Override
             protected void convert(MyViewHolder vHolder, Object o, int position) {
-                        vHolder.setImageDraw(R.id.iv_left,R.mipmap.icon6);
+
+                        vHolder.setImageBitmap(R.id.iv_left, BitmapUtil.getBitmapUtil().SettingBigBitmap(R.mipmap.icon6,300,300));
                 vHolder.setImageHeadUrl(R.id.iv_right,"https://ps.ssl.qhimg.com/dmfd/305_417_/t01c9e6e83151fd8f08.jpg");
                 vHolder.setText(R.id.tv_message,list.get(position)+position);
             }
