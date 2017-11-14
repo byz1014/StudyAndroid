@@ -18,6 +18,10 @@
                     <item android:title="背景模糊"
                         android:icon="@mipmap/icon4"
                         android:id="@+id/background_alph"/>
+                    <item android:id="@+id/recycle_test"
+                        android:title="RecycleView自定义适配器"
+                        android:icon="@mipmap/icon5"/>
+
                 </group>
 
             </menu>

@@ -38,7 +38,7 @@ public class LoadingActivity extends BaseActivity implements View.OnClickListene
         setLeftListener(new OnTitleLeftListener() {
             @Override
             public void onLeft() {
-                finish();
+                 finish();
             }
         });
         setRightListener(new OnTitleRightListener() {

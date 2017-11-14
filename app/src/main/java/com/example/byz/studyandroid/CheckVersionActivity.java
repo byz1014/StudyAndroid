@@ -135,7 +135,7 @@ public class CheckVersionActivity extends BaseActivity {
     @Override
     protected void onResume() {
         super.onResume();
-        onSelectPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, ACCESS_NETWORK_STATE);
+        onSelectPermissions(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.ACCESS_NETWORK_STATE);
         onAskPermission();
     }
 

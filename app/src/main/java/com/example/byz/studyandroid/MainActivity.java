@@ -11,7 +11,6 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.byz.studyandroid.adapter.LeftAdapter;
 import com.example.byz.studyandroid.base.BaseActivity;
 import com.example.byz.studyandroid.bean.LeftInfo;
 import com.example.byz.studyandroid.view.CircleImageView;
@@ -32,7 +31,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             R.mipmap.icon1,R.mipmap.icon2,R.mipmap.icon3,
             R.mipmap.icon4,R.mipmap.icon5,R.mipmap.icon6,R.mipmap.icon7,
             R.mipmap.icon8,R.mipmap.icon9,R.mipmap.icona,R.mipmap.iconb };
-    LeftAdapter leftAdapter;
     TextView tv_name;
     CircleImageView cv_header  ;
     View  headerLayout;
@@ -60,7 +58,6 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
         iv_show.setOnClickListener(this);
         dl_body.addDrawerListener(drawerListener);
         navigation_view.setNavigationItemSelectedListener(onNavigationItemSelectedListener);
-        leftAdapter = new LeftAdapter(list,getActivity());
         headerLayout = navigation_view.getHeaderView(0);
         tv_name = (TextView)headerLayout.findViewById(R.id.tv_name);
         cv_header = (CircleImageView)headerLayout.findViewById(R.id.cv_header);
@@ -106,11 +103,17 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     bundle3.putString("title","背景模糊");
                     goActivity(BackgroundActivity.class,bundle3);
                     break;
-                case R.id.mu_test:
+                case R.id.recycle_test:
                     Bundle bundle4 = new Bundle();
-                    bundle4.putString("title","测试模块");
-                    goActivity(TestActivity.class,bundle4);
+                    bundle4.putString("title","Recycle自定义适配器");
+                    goActivity(RecycleViewActivity.class,bundle4);
                     break;
+                case R.id.mu_test:
+                    Bundle bundles = new Bundle();
+                    bundles.putString("title","测试模块");
+                    goActivity(TestActivity.class,bundles);
+                    break;
+
             }
             return false;
         }

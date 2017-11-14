@@ -2,6 +2,9 @@ package com.example.byz.studyandroid.utils;
 
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+
+import com.example.byz.studyandroid.base.MyApplication;
 
 /**
  * Created by byz on 2017/11/8.
@@ -20,6 +23,51 @@ private BitmapUtil (){}
         }
         return bitmapUtil;
     }
+
+
+    /**
+     * 大图片处理
+     * @param res
+     * @param width
+     * @param height
+     * @return
+     */
+    public Bitmap SettingBigBitmap(int res,float width,float height){
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        int index = calculateInSampleSize(options,width,height);
+        options.inSampleSize = index;
+        options.inJustDecodeBounds = false;
+        return BitmapFactory.decodeResource(MyApplication.getMyApplication().getResources(), res, options);
+    }
+
+  
+
+    //计算压缩比例
+    public   int calculateInSampleSize(BitmapFactory.Options options, float reqWidth, float reqHeight) {
+        // 源图片的高度和宽度
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+        if (height > reqHeight || width > reqWidth) {
+            // 计算出实际宽高和目标宽高的比率
+            final int heightRatio = Math.round((float) height / (float) reqHeight);
+            final int widthRatio = Math.round((float) width / (float) reqWidth);
+            // 选择宽和高中最小的比率作为inSampleSize的值，这样可以保证最终图片的宽和高
+            // 一定都会大于等于目标的宽和高。
+            inSampleSize = heightRatio < widthRatio ? heightRatio : widthRatio;
+        }
+        return inSampleSize;
+    }
+
+
+
+
+
+
+
+
+
 
     public Bitmap fastblur(Context context, Bitmap sentBitmap, int radius) {
 

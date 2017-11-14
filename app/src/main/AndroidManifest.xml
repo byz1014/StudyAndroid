@@ -52,6 +52,7 @@
         <activity android:name=".CheckVersionActivity"/>
         <activity android:name=".ScanActivity"/>
         <activity android:name=".PasswordIocnActivity"/>
+        <activity android:name=".RecycleViewActivity"/>
     </application>
 
 </manifest>
