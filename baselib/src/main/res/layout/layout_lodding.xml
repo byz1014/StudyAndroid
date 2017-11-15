@@ -6,7 +6,7 @@
     android:background="@drawable/shape_lodding_back"
     >
 
-
+<!-- -&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;-->
      <ProgressBar
          android:layout_width="wrap_content"
          android:layout_height="wrap_content"

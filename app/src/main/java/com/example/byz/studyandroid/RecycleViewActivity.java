@@ -4,9 +4,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import com.example.baselib.base.BaseActivity;
 import com.example.byz.studyandroid.adapter.MyViewHolder;
 import com.example.byz.studyandroid.adapter.TotalRecycleAdapter;
-import com.example.byz.studyandroid.base.BaseActivity;
 import com.example.byz.studyandroid.utils.BitmapUtil;
 
 import org.greenrobot.eventbus.Subscribe;

@@ -10,7 +10,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.example.byz.studyandroid.base.BaseActivity;
+import com.example.baselib.base.BaseActivity;
 import com.example.byz.studyandroid.utils.BitmapUtil;
 
 import org.greenrobot.eventbus.Subscribe;

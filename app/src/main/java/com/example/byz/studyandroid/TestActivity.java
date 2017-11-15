@@ -3,7 +3,7 @@ package com.example.byz.studyandroid;
 import android.os.Bundle;
 import android.view.View;
 
-import com.example.byz.studyandroid.base.BaseActivity;
+import com.example.baselib.base.BaseActivity;
 
 import org.greenrobot.eventbus.Subscribe;
 

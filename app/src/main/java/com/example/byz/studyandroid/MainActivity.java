@@ -12,7 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.baidumap.BaiduMapActivity;
-import com.example.byz.studyandroid.base.BaseActivity;
+import com.example.baselib.base.BaseActivity;
 import com.example.byz.studyandroid.bean.LeftInfo;
 import com.example.byz.studyandroid.view.CircleImageView;
 

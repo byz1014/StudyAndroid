@@ -1,4 +1,4 @@
-package com.example.byz.studyandroid.base;
+package com.example.baselib.base;
 
 import android.app.Application;
 import android.graphics.Bitmap;

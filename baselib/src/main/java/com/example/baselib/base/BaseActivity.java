@@ -1,4 +1,4 @@
-package com.example.byz.studyandroid.base;
+package com.example.baselib.base;
 
 import android.app.Activity;
 import android.content.Context;
@@ -17,8 +17,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.byz.studyandroid.R;
-import com.example.byz.studyandroid.view.DialogLoading;
+import com.example.baselib.R;
+import com.example.baselib.view.DialogLoading;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
@@ -134,17 +134,15 @@ public abstract class BaseActivity extends AppCompatActivity {
     View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
-            switch (view.getId()) {
-                case R.id.iv_left:
-                   if(onTitleLeftListener !=null){
-                       onTitleLeftListener.onLeft();
-                   }
-                    break;
-                case R.id.iv_right:
-                    if(onTitleRightListener !=null){
-                        onTitleRightListener.onRight();
-                    }
-                    break;
+
+            if(view.getId()== R.id.iv_left){
+                if(onTitleLeftListener !=null){
+                    onTitleLeftListener.onLeft();
+                }
+            }else if(view.getId()== R.id.iv_right){
+                if(onTitleRightListener !=null){
+                    onTitleRightListener.onRight();
+                }
             }
         }
     };

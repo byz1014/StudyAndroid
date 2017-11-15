@@ -1,4 +1,4 @@
-package com.example.byz.studyandroid.view;
+package com.example.baselib.view;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -7,7 +7,8 @@ import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
 import android.widget.TextView;
 
-import com.example.byz.studyandroid.R;
+import com.example.baselib.R;
+
 
 /**
  * Created by byz on 2017/11/6.
@@ -18,7 +19,7 @@ public class DialogLoading extends AlertDialog {
     private TextView tv_lodding_message;
 
     public DialogLoading(@NonNull Context context) {
-        super(context,R.style.dialog_me);
+        super(context, R.style.dialog_me);
         this.context = context;
     }
 

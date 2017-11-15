@@ -4,7 +4,8 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 
-import com.example.byz.studyandroid.base.MyApplication;
+import com.example.baselib.base.MyApplication;
+
 
 /**
  * Created by byz on 2017/11/8.

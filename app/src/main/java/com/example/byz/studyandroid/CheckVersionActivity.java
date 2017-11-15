@@ -11,7 +11,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.baselib.PermissionsUtils;
-import com.example.byz.studyandroid.base.BaseActivity;
+import com.example.baselib.base.BaseActivity;
 import com.example.byz.studyandroid.utils.HttpRequestUtilTest;
 import com.example.byz.studyandroid.utils.UpdateManager;
 

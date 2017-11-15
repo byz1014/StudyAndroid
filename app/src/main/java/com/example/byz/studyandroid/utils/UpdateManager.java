@@ -21,8 +21,8 @@ import android.webkit.MimeTypeMap;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.baselib.base.MyApplication;
 import com.example.byz.studyandroid.R;
-import com.example.byz.studyandroid.base.MyApplication;
 
 import org.greenrobot.eventbus.EventBus;
 
