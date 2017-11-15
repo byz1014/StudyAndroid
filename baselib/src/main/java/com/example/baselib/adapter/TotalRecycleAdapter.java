@@ -1,4 +1,4 @@
-package com.example.byz.studyandroid.adapter;
+package com.example.baselib.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
