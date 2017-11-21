@@ -27,7 +27,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
     ImageView iv_show;
     RecyclerView rv_left_list;
     List<LeftInfo> list;
-    String messages[]={"loading","版本检查","二维码扫描","背景模糊","功能5","功能6","功能7","功能8","功能9","功能10","test模块"};
+    String messages[]={"小技巧","版本检查","二维码扫描","背景模糊","功能5","功能6","功能7","功能8","功能9","功能10","test模块"};
     int resources[]={
             R.mipmap.icon1,R.mipmap.icon2,R.mipmap.icon3,
             R.mipmap.icon4,R.mipmap.icon5,R.mipmap.icon6,R.mipmap.icon7,
@@ -86,8 +86,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
             switch (item.getItemId()){
                 case R.id.mu_loading:
                     Bundle bundle = new Bundle();
-                    bundle.putString("title","loading");
-                    goActivity(LoadingActivity.class,bundle);
+                    bundle.putString("title","小技巧");
+                    goActivity(SmallSkillActivity.class,bundle);
                     break;
                 case R.id.check_version:
                     Bundle bundle1 = new Bundle();
@@ -110,7 +110,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener{
                     goActivity(RecycleViewActivity.class,bundle4);
                     break;
                 case R.id.mu_baidu_map:
-                    goActivity(BaiduMapActivity.class,null);
+                    Bundle bundle5 = new Bundle();
+                    bundle5.putString("title","百度地图");
+                    goActivity(BaiduMapActivity.class,bundle5);
                     break;
                 case R.id.mu_test:
                     Bundle bundles = new Bundle();

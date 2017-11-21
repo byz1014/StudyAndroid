@@ -1,12 +1,9 @@
 package com.example.baselib.adapter;
 
-import android.content.Context;
 import android.graphics.Bitmap;
 import android.support.v7.widget.RecyclerView;
 import android.util.SparseArray;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -20,16 +17,13 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     View mView;
 
     private SparseArray<View> myViews;
-    private MyViewHolder(View itemView) {
+    public MyViewHolder(View itemView) {
         super(itemView);
         this.myViews = new SparseArray<View>();
         this.mView = itemView;
+
     }
 
-    public static MyViewHolder  getMyViewHolder(Context mContext, ViewGroup parent, int viewType, int layout) {
-        View view = LayoutInflater.from(mContext).inflate(layout, parent, false);
-        return new MyViewHolder(view);
-    }
 
     public TextView getTextView(int id, String text){
         TextView textView = (TextView)mView.findViewById(id);
@@ -88,6 +82,10 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
 
         mTextView.setText(txt);
         return this;
+    }
+
+    public  View getmView(){
+        return mView;
     }
 
 }

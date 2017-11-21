@@ -1,13 +1,82 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <com.baidu.mapapi.map.MapView
-        android:id="@+id/bmapView"
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
-        android:clickable="true" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:id="@+id/ll_map">
+
+    </LinearLayout>
+<RelativeLayout
+    android:layout_width="250dp"
+    android:layout_height="250dp"
+    android:background="@drawable/right_buttom_back"
+    android:layout_alignParentBottom="true"
+    android:layout_alignParentRight="true"
+    android:id="@+id/right_bottmo"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:orientation="horizontal"
+        android:id="@+id/ll_right"
+        >
+    </RelativeLayout>
 
 
-</LinearLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/feiji"
+        android:id="@+id/iv_icon_1"
+        android:layout_alignBottom="@id/ll_right"
+        android:layout_alignRight="@id/ll_right"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/fengzheng"
+        android:id="@+id/iv_icon_2"
+        android:layout_alignBottom="@id/ll_right"
+        android:layout_alignRight="@id/ll_right"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/maozi"
+        android:id="@+id/iv_icon_3"
+        android:layout_alignBottom="@id/ll_right"
+        android:layout_alignRight="@id/ll_right"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/zhangpeng"
+        android:layout_alignBottom="@id/ll_right"
+        android:layout_alignRight="@id/ll_right"
+        android:id="@+id/iv_icon_4"
+        />
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/zhinanzhen"
+        android:id="@+id/iv_icon_5"
+        android:layout_alignBottom="@id/ll_right"
+        android:layout_alignRight="@id/ll_right"
+        />
+
+
+</RelativeLayout>
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@mipmap/item_body"
+        android:id="@+id/iv_bage"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        />
+
+</RelativeLayout>

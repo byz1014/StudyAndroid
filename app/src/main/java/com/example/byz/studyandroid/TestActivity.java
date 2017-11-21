@@ -1,6 +1,8 @@
 package com.example.byz.studyandroid;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.example.baselib.base.BaseActivity;
@@ -12,6 +14,7 @@ import org.greenrobot.eventbus.Subscribe;
  */
 
 public class TestActivity extends BaseActivity implements View.OnClickListener {
+    RecyclerView rv_body;
 
     @Override
     public void onClick(View view) {
@@ -34,11 +37,16 @@ public class TestActivity extends BaseActivity implements View.OnClickListener {
                 finish();
             }
         });
+        rv_body = (RecyclerView)findViewById(R.id.rv_body);
+        rv_body.setLayoutManager(new LinearLayoutManager(this));
     }
+
 
     @Override
     @Subscribe
     public void onEventMainThread(String str) {
 
     }
+
+
 }

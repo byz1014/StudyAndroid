@@ -50,12 +50,15 @@
         </activity>
         <activity android:name=".TestActivity"/>
         <activity android:name=".BackgroundActivity"/>
-        <activity android:name=".LoadingActivity"/>
+        <activity android:name=".SmallSkillActivity"/>
         <activity android:name=".CheckVersionActivity"/>
         <activity android:name=".ScanActivity"/>
         <activity android:name=".PasswordIocnActivity"/>
         <activity android:name=".RecycleViewActivity"/>
         <activity android:name="com.example.baidumap.BaiduMapActivity"/>
+        <activity android:name=".ImageActivity"/>
+        <activity android:name=".MaxActivity"/>
+        <activity android:name=".AlgorithmActivity"/>
     </application>
 
 </manifest>
